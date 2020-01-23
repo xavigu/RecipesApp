@@ -26,4 +26,9 @@ export class ShoppingListService {
     this.ingredients.push(ingredient);
     this.ingredientsChanged.emit(this.ingredients.slice());
   }
+
+  addIngredients(ingredients: Ingredient[]) {
+    this.ingredients.push(...ingredients); //Se hace push de los nuevos ingredientes a nuestro array de ingredients
+    this.ingredientsChanged.emit(this.ingredients.slice());
+  }
 }
