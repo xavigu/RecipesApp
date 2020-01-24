@@ -8,13 +8,19 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 
 
 const routes: Routes = [
-  { path: 'recipes', component: RecipesComponent, children: [
-    {path: '', component: RecipeStartComponent},
-    {path: ':id', component: RecipeDetailComponent}
-  ]},
-  { path: 'shopping-list', component: ShoppingListComponent},
-  { path: '', redirectTo: '/recipes' , pathMatch:'full'} //Te redirija a /recipes si el path entero es vacio
-]
+  {
+    path: "recipes",
+    component: RecipesComponent,
+    children: [
+      { path: "", component: RecipeStartComponent },
+      { path: "new", component: RecipeDetailComponent },
+      { path: ":id", component: RecipeDetailComponent },
+      { path: ":id/edit", component: RecipeDetailComponent }
+    ]
+  },
+  { path: "shopping-list", component: ShoppingListComponent },
+  { path: "", redirectTo: "/recipes", pathMatch: "full" } //Te redirija a /recipes si el path entero es vacio
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)], //Le pasamos nuestro array de rutas para configurar el router module de Angular
