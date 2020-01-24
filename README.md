@@ -34,3 +34,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - Añadimos a los anchor(href) del navbar sus respectivos routerLink
 - Añadimos el routerLinkActive al contenedor de los anchor para que añada la clase activa al elemento cuando este activado
 - Eliminar ref elements to dont reload page
+- Añadir children routes para cargar los componentes hijos de recipes
+  (habrá que crear uno nuevo que sea el de por defecto cuando accedes al componente recipes (recipe-start))
+  (otro sera el que al dar a un elemento del recipe-list component 
+   comunique el id del recipe-item clickado 
+   para que cargue el recipe-detail component(recoge el id por el ActivatedRoute y creamos un metodo en el service
+   que obtenga la recipe por id) 

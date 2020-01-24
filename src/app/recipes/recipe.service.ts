@@ -40,6 +40,10 @@ export class RecipeService {
     //Usamos slice para no manejar el array recipes desde fuera, solamente obtener una copia
   }
 
+  getRecipe(id: number){
+    return this.recipes[id];
+  }
+
   addIngredientsToShoppingList(ingredients: Ingredient[]){
     this.shopService.addIngredients(ingredients);
   }
