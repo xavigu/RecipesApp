@@ -37,6 +37,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - Añadir children routes para cargar los componentes hijos de recipes
   (habrá que crear uno nuevo que sea el de por defecto cuando accedes al componente recipes (recipe-start))
   (otro sera el que al dar a un elemento del recipe-list component 
-   comunique el id del recipe-item clickado 
-   para que cargue el recipe-detail component(recoge el id por el ActivatedRoute y creamos un metodo en el service
-   que obtenga la recipe por id) 
+   comunique el id del recipe-item clickado (a través de un Input recoge el index del ngfor)
+   utilizamos el routerLink para que vaya al recipe-detail component con la id especifica
+   (creamos un metodo en el service que obtenga la recipe por id y en el recipe-detail este siempre escuchando por cambios en la URL
+   para cargar la nueva receta con el metodo del servicio) 
