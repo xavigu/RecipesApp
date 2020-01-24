@@ -31,5 +31,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - Creamos el fichero app-routing module con las rutas
 - Importamos la clase de dichero fichero al app.module
 - Sustituimos la referencia a los dos componentes por la directica router-outlet
-- Añadimos a los anchor del navbar sus respectivos routerLink
+- Añadimos a los anchor(href) del navbar sus respectivos routerLink
 - Añadimos el routerLinkActive al contenedor de los anchor para que añada la clase activa al elemento cuando este activado
+- Eliminar ref elements to dont reload page
