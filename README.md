@@ -25,3 +25,11 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+## Pasos a seguir para añadir las rutas
+- Creamos el fichero app-routing module con las rutas
+- Importamos la clase de dichero fichero al app.module
+- Sustituimos la referencia a los dos componentes por la directica router-outlet
+- Añadimos a los anchor del navbar sus respectivos routerLink
+- Añadimos el routerLinkActive al contenedor de los anchor para que añada la clase activa al elemento cuando este activado
