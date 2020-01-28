@@ -18,16 +18,21 @@ export class ShoppingListService {
 
   constructor() { }
 
-  getIngredient(index: number){
-    return this.ingredients[index];
-  }
-
   getIngredients(){
     return this.ingredients.slice();
   }
 
+  getIngredient(index: number){
+    return this.ingredients[index];
+  }
+
   updateIngredient(index: number, newIngredient: Ingredient ){
     this.ingredients[index] = newIngredient;
+    this.ingredientsChanged.next(this.ingredients.slice());
+  }
+
+  deleteIngredient(index: number){
+    this.ingredients.splice(index, 1);
     this.ingredientsChanged.next(this.ingredients.slice());
   }
   //Cuando se da al boton de Add se añade el nuevo ingrediente al array de Ingredientes
