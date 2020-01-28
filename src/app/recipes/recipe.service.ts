@@ -24,9 +24,8 @@ export class RecipeService {
       'Best Burguer Ever', 
       'https://ep01.epimg.net/elpais/imagenes/2019/09/06/estilo/1567761729_884026_1567762022_noticia_normal.jpg',
       [
-        new Ingredient('Tortillas', 1),
-        new Ingredient('Carne', 5),
-        new Ingredient('Frijoles', 20)
+        new Ingredient('Pan', 2),
+        new Ingredient('Carne', 1)
       ]
       )
     ]; 
