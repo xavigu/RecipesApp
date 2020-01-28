@@ -7,7 +7,10 @@
                         type="submit"
                         class="btn btn-success main"
                         [disabled]="!recipeForm.valid">Save</button>
-                    <button type="button" class="btn btn-danger main">Cancel</button>
+                    <button 
+                        (click)="goBack()"
+                        type="button" 
+                        class="btn btn-danger main">Cancel</button>
                 </div>
             </div>
             <div class="row">
