@@ -25,6 +25,11 @@ export class ShoppingListService {
   getIngredients(){
     return this.ingredients.slice();
   }
+
+  updateIngredient(index: number, newIngredient: Ingredient ){
+    this.ingredients[index] = newIngredient;
+    this.ingredientsChanged.next(this.ingredients.slice());
+  }
   //Cuando se da al boton de Add se añade el nuevo ingrediente al array de Ingredientes
   //Y usando el EventEmitter se pasa una copia de este array que recogera el shopping-list
   //component para pintar los ingredientes
