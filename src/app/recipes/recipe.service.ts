@@ -34,6 +34,13 @@ export class RecipeService {
 
   constructor(private shopService: ShoppingListService) { }
 
+  //Function to overwrite recipes array when we fetch Data
+  setRecipes(recipes: Recipe[]){
+    this.recipes = recipes;
+    //Emitimos una copia de las nuevas recipes para que todos los que esten subscritos lo sepan
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
   getRecipes(){
     return this.recipes.slice(); 
     //Usamos slice para no manejar el array recipes desde fuera, solamente obtener una copia
