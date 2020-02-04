@@ -1,17 +1,29 @@
 <div class="row">
     <div class="col-xs-12 col-md-6">
-        <form>
+        <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
             <div class="form-group">
                 <label for="email">E-mail</label> <!-- el for esta asociado al id del elemento input-->
-                <input type="email" id="email" class="form-control"> 
+                <input type="email" 
+                       id="email" 
+                       class="form-control" 
+                       ngModel
+                       name="email"
+                       required
+                       email> 
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" class="form-control"> 
+                <input type="password" 
+                       id="password" 
+                       class="form-control"
+                       ngModel
+                       name="password"
+                       required
+                       minlength="6"> 
             </div>
             <div>
                 <!-- Hay que poner el type del boton para que no haga submit automaticamente -->
-                <button type="submit" class="btn btn-primary">{{ isLogging ? 'Login' : 'Sign Up'}}</button> |   
+                <button type="submit" class="btn btn-primary" [disabled]="!authForm.valid">{{ isLogging ? 'Login' : 'Sign Up'}}</button> |   
                 <button type="button" class="btn btn-primary" (click)="onSwitchMode()">Swith to {{ isLogging ? 'Sign up' : 'Login'}} mode</button>
             </div>
         </form>
