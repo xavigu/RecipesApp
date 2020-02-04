@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RecipeService } from '../recipes/recipe.service';
 import { Recipe } from '../recipes/recipe.model';
+import { map } from 'rxjs/operators'
 
 
 @Injectable({
@@ -18,11 +19,17 @@ export class DataStorageService {
             });
     };
     //Realizamos el subscribe porque la respuesta puede interesar al recipeService que es que maneja las recipes
-    fetchRecipes(){
+    fetchRecipes() {
         this.http.get<Recipe[]>('https://ng-course-recipeapp.firebaseio.com/recipes.json')
+            .pipe(map(recipes => {
+                return recipes.map(recipe => { //JS Method para mapear el array Recipes y modificar su contenido
+                    return { ...recipe, ingredients: recipe.ingredients ? recipe.ingredients : [] };
+                    //el spread operator(...) es para copiar toda la data existente y mira si existe el recipe.ingredients y si no crea para esa variable un empty array
+                });
+            }))
             .subscribe((recipes: Recipe[]) => {
                 this.recipeService.setRecipes(recipes);
-            }) 
+            })
     }
 
 }
