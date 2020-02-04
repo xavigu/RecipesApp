@@ -10,8 +10,9 @@
                 <input type="password" id="password" class="form-control"> 
             </div>
             <div>
-                <button class="btn btn-primary">Sign up</button> |   
-                <button class="btn btn-primary">Swith to Login</button>
+                <!-- Hay que poner el type del boton para que no haga submit automaticamente -->
+                <button type="submit" class="btn btn-primary">{{ isLogging ? 'Login' : 'Sign Up'}}</button> |   
+                <button type="button" class="btn btn-primary" (click)="onSwitchMode()">Swith to {{ isLogging ? 'Sign up' : 'Login'}} mode</button>
             </div>
         </form>
     </div>
