@@ -21,7 +21,7 @@ export class AuthService {
 
   signup(email:string, password:string){
     //Se le pasara a la peticion post un object con las properties que espera obtener
-    this.http.post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.API_KEY}`, 
+    return this.http.post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.API_KEY}`, 
     {
       email: email,
       password: password,
