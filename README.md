@@ -40,4 +40,12 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
    comunique el id del recipe-item clickado (a través de un Input recoge el index del ngfor)
    utilizamos el routerLink para que vaya al recipe-detail component con la id especifica
    (creamos un metodo en el service que obtenga la recipe por id y en el recipe-detail este siempre escuchando por cambios en la URL
-   para cargar la nueva receta con el metodo del servicio) 
+   para cargar la nueva receta con el metodo del servicio)
+
+## Info Firebase
+
+- Nos creamos un proyecto en Firebase
+- Nos creamos una Realtime Database (en test mode). Haremos las HTTP requests a la URL que nos proporcionan
+- En las reglas de la Database pondremos la instrucción de que solo se puede escribir y leer si estas auth
+- Habilitaremos la authentication a través de email en la página de authentication
+- Para obtener la API_KEY de nuestro backend de Firebase iremos a Configuracón del proyecto dandole a la rueda en la consola de Firebase.
