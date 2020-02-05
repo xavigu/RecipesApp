@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { throwError, Subject } from 'rxjs';
+import { User } from './user.model';
 
 //Interface con el contenido que se espera de la signup respuesta
 export interface AuthResponseData{
-  kind: string;
   idToken: string;
+  email: string;
   refreshToken: string;
   expiresIn: string;
   localId: string;
@@ -18,9 +19,10 @@ export interface AuthResponseData{
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
-
+  user = new Subject<User>();
   API_KEY = 'AIzaSyDZHGlZOqyCfD28_Pf6c8z3lAeUQ27QKh0';
+  
+  constructor(private http: HttpClient) { }
 
   signup(email:string, password:string){
     //Se le pasara a la peticion post un object con las properties que espera obtener
@@ -29,7 +31,9 @@ export class AuthService {
       email: email,
       password: password,
       returnSecureToken: true
-    }).pipe(catchError(this.handleError));
+    }).pipe(catchError(this.handleError), tap(resData => { //tap nos permite realizar alguna accion sin cambiar la response
+        this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+    })); 
 
   };
 
@@ -39,7 +43,23 @@ export class AuthService {
       email: email,
       password: password,
       returnSecureToken: true
-    }).pipe(catchError(this.handleError));
+      }).pipe(catchError(this.handleError), tap(resData => { //tap nos permite realizar alguna accion sin cambiar la response
+        this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+      }));
+  }
+
+  //method to handle authentication
+  private handleAuthentication(email:string, userId:string, token:string, expiresIn: number){
+    const expirationDate = new Date(
+      new Date().getTime() + expiresIn * 1000
+    );
+    const user = new User(
+      email,
+      userId,
+      token,
+      expirationDate
+    );
+    this.user.next(user);
   }
 
   //method that return throwError and use it in the catchError operator
