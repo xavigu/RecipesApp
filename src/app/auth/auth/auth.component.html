@@ -4,7 +4,10 @@
             {{error}}
         </div> -->
         <!-- Dynamic alert modal component -->
-        <app-alert [message]="error" *ngIf="error" (close)="closeModal()"></app-alert>
+        <!-- <app-alert [message]="error" *ngIf="error" (close)="closeModal()"></app-alert> -->
+        <!-- Programmatic create alert modal component -->
+        <ng-template appPlaceholder></ng-template>
+        
         <form *ngIf="!isLoading; else loading" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
             <div class="form-group">
                 <label for="email">E-mail</label> <!-- el for esta asociado al id del elemento input-->
