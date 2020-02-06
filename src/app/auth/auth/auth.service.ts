@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError, Subject, BehaviorSubject } from 'rxjs';
 import { User } from './user.model';
+import { Router } from '@angular/router';
 
 //Interface con el contenido que se espera de la signup respuesta
 export interface AuthResponseData{
@@ -22,7 +23,7 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
   API_KEY = 'AIzaSyDZHGlZOqyCfD28_Pf6c8z3lAeUQ27QKh0';
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   signup(email:string, password:string){
     //Se le pasara a la peticion post un object con las properties que espera obtener
@@ -46,6 +47,12 @@ export class AuthService {
       }).pipe(catchError(this.handleError), tap(resData => { //tap nos permite realizar alguna accion sin cambiar la response
         this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
       }));
+  };
+
+  //el BehaviourSubject emita un user a null para que no se puedan hacer peticiones que necesitan un user.token
+  logout() {
+    this.user.next(null);
+    this.router.navigate(['/auth']);
   }
 
   //method to handle authentication
