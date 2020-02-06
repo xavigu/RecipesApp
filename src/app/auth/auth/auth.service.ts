@@ -20,6 +20,7 @@ export interface AuthResponseData{
 })
 export class AuthService {
 
+  private tokenExpirationTimer: any;
   user = new BehaviorSubject<User>(null);
   API_KEY = 'AIzaSyDZHGlZOqyCfD28_Pf6c8z3lAeUQ27QKh0';
   
@@ -53,6 +54,17 @@ export class AuthService {
   logout() {
     this.user.next(null);
     this.router.navigate(['/auth']);
+    localStorage.removeItem('dataUser');
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
+  };
+
+  autoLogout(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
   }
 
   autoLogin(){
@@ -67,9 +79,11 @@ export class AuthService {
     } 
     const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
     if (loadedUser.token) {
-      this.user.next(loadedUser);     
+      this.user.next(loadedUser);
+      const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime(); //getTime from seconds to miliseconds
+      this.autoLogout(expirationDuration);
     }
-  }
+  };
 
   //method to handle authentication
   private handleAuthentication(email:string, userId:string, token:string, expiresIn: number){
@@ -83,7 +97,8 @@ export class AuthService {
       expirationDate
     );
     this.user.next(user);
-    localStorage.setItem('dataUser', JSON.stringify(user))
+    this.autoLogout(expiresIn * 1000);
+    localStorage.setItem('dataUser', JSON.stringify(user));
   }
 
   //method that return throwError and use it in the catchError operator
