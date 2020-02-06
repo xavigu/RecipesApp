@@ -55,6 +55,22 @@ export class AuthService {
     this.router.navigate(['/auth']);
   }
 
+  autoLogin(){
+    const userData: {
+      email:string;
+      id: string;
+      _token: string;
+      _tokenExpirationDate: string;
+    } = JSON.parse(localStorage.getItem('dataUser'))
+    if (!userData) {
+      return;
+    } 
+    const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
+    if (loadedUser.token) {
+      this.user.next(loadedUser);     
+    }
+  }
+
   //method to handle authentication
   private handleAuthentication(email:string, userId:string, token:string, expiresIn: number){
     const expirationDate = new Date(
@@ -67,6 +83,7 @@ export class AuthService {
       expirationDate
     );
     this.user.next(user);
+    localStorage.setItem('dataUser', JSON.stringify(user))
   }
 
   //method that return throwError and use it in the catchError operator
