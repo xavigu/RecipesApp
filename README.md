@@ -26,6 +26,15 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
+## Info content project
+
+- Use Template Driven and Reactive Forms
+- Use Firebase Database and Authentication system.
+- Use **Resolver** to runs code before some routes is loaded to ensure that certain data the route depends on is there.
+- Use **Intercept Service** to add user token to the Database requests
+- Use **BehaviourSubject** user to emit the value emit previously even if you are not subscribed at the moment that is emitted and use **take(1)** to subscribe and unsubscribe 1 time.
+- Use **Guard** to prevent users not authenticated go to recipes page and redirect usin **URLTree**.
+
 
 ## Pasos a seguir para añadir las rutas
 - Creamos el fichero app-routing module con las rutas
