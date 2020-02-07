@@ -25,14 +25,6 @@ import { RecipesRoutingModule } from './recipes-routing.module';
         CommonModule, //Similar al BrowserModule que solo se puede utilizar en el app.module
         ReactiveFormsModule,
         RecipesRoutingModule
-    ],
-    exports: [
-        RecipesComponent,
-        RecipeListComponent,
-        RecipeDetailComponent,
-        RecipeItemComponent,
-        RecipeStartComponent,
-        RecipeEditComponent
     ]
 })
 export class RecipesModule { }
