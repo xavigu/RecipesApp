@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { AlertComponent } from './alert/alert.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
