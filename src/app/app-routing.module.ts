@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const appRoutes: Routes = [  
-  { path: '', redirectTo: '/recipes', pathMatch: 'full' } //Te redirija a /recipes si el path entero es vacio
+  { path: '', redirectTo: '/recipes', pathMatch: 'full' }, //Te redirija a /recipes si el path entero es vacio
+  { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule' }
 ];
 
 @NgModule({
