@@ -4,6 +4,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { throwError, Subject, BehaviorSubject } from 'rxjs';
 import { User } from './user.model';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 //Interface con el contenido que se espera de la signup respuesta
 export interface AuthResponseData{
@@ -22,13 +23,12 @@ export class AuthService {
 
   private tokenExpirationTimer: any;
   user = new BehaviorSubject<User>(null);
-  API_KEY = 'AIzaSyDZHGlZOqyCfD28_Pf6c8z3lAeUQ27QKh0';
   
   constructor(private http: HttpClient, private router: Router) { }
 
   signup(email:string, password:string){
     //Se le pasara a la peticion post un object con las properties que espera obtener
-    return this.http.post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.API_KEY}`, 
+    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKey, 
     {
       email: email,
       password: password,
@@ -40,7 +40,7 @@ export class AuthService {
   };
 
   login(email: string, password: string){
-    return this.http.post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.API_KEY}`, 
+    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.firebaseAPIKey, 
     {
       email: email,
       password: password,
