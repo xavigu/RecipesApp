@@ -1,0 +1,32 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { AlertComponent } from './alert/alert.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { DropdownDirective } from './dropdown.directive';
+import { PlaceholderDirective } from './placeholder.directive';
+
+
+
+@NgModule({
+    declarations: [
+      AlertComponent,
+      LoadingSpinnerComponent,
+      DropdownDirective,
+      PlaceholderDirective
+    ],
+    imports: [
+      CommonModule
+    ],
+    exports: [
+      AlertComponent,
+      LoadingSpinnerComponent,
+      DropdownDirective,
+      PlaceholderDirective,
+      CommonModule      
+    ],
+    entryComponents: [AlertComponent]
+})
+export class SharedModule { }
