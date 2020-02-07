@@ -58,3 +58,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - En las reglas de la Database pondremos la instrucción de que solo se puede escribir y leer si estas auth
 - Habilitaremos la authentication a través de email en la página de authentication
 - Para obtener la API_KEY de nuestro backend de Firebase iremos a Configuracón del proyecto dandole a la rueda en la consola de Firebase.
+- Si queremos desplegar nuestro app en un Firebase hosting habrás que seguir estos [pasos](https://firebase.google.com/docs/hosting?hl=es)
