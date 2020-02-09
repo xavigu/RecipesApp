@@ -12,10 +12,15 @@ export class DataStorageService {
     //Nos subscribimos directamente en el metodo que hace la put request porque no estamos interesados en la respuesta
     storeRecipes() {
         const recipes = this.recipeService.getRecipes();
-        return this.http.put('https://ng-course-recipeapp.firebaseio.com/recipes.json', recipes)
-            .subscribe(response => {
-                console.log(response);
-            });
+        if (recipes.length == 0) {
+            alert("NO RECIPES, FETCH DATA FIRST OR ADD A NEW RECIPE");
+            return;
+        } else {
+            return this.http.put('https://ng-course-recipeapp.firebaseio.com/recipes.json', recipes)
+                .subscribe(response => {
+                    console.log("Save Recipes Data:", response);
+                });            
+        }
     };
     //Realizamos el subscribe porque la respuesta puede interesar al recipeService que es que maneja las recipes
     fetchRecipes() {

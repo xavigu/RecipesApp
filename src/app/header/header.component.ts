@@ -1,9 +1,11 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy, ComponentFactoryResolver, ViewChild} from '@angular/core';
 import { DataStorageService } from '../shared/data-storage.service';
 import { AuthService } from '../auth/auth.service';
+import { AlertComponent } from 'src/app/shared/alert/alert.component';
 import { User } from '../auth/user.model';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { PlaceholderDirective } from '../shared/placeholder.directive';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +18,14 @@ export class HeaderComponent implements OnInit, OnDestroy{
   isAuthenticated = false;
   authUser: User;
 
-  constructor(private dataStorageService: DataStorageService, private authService: AuthService, private router: Router){}
+  //Este elemento hace referencia a la directiva añadida en el DOM
+  @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
+  private closeSub: Subscription;
+
+  constructor(private dataStorageService: DataStorageService, 
+              private authService: AuthService, 
+              private router: Router,
+              private componentFactoryResolver: ComponentFactoryResolver){}
 
   ngOnInit() {
     this.userSub = this.authService.user.subscribe(userData => {
@@ -30,11 +39,32 @@ export class HeaderComponent implements OnInit, OnDestroy{
   }
 
   onFetchData(){
-    this.dataStorageService.fetchRecipes().subscribe();
+    this.dataStorageService.fetchRecipes()
+    .subscribe(
+      res => console.log('Fetch response: ', res), 
+      () => {
+        this.showErrorAlert('There is not recipes in the database');
+      });
   }
 
   onLogout(){
     this.authService.logout();
+  }
+
+  private showErrorAlert(message: string) {
+    const alertCmpFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
+    const hostViewContainerRef = this.alertHost.viewContainerRef;
+    //limpia todo el contenido que pueda ver en el container antes de añadir el alert component
+    hostViewContainerRef.clear();
+    //Referencia al alert component
+    const componentRef = hostViewContainerRef.createComponent(alertCmpFactory);
+    //Instancia del component pudiendo user las properties(variables) del alert component
+    componentRef.instance.message = message;
+    this.closeSub = componentRef.instance.close.subscribe(() => {
+      this.closeSub.unsubscribe();
+      hostViewContainerRef.clear();
+    })
+
   }
 
   ngOnDestroy() {
