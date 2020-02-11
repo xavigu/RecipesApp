@@ -32,7 +32,7 @@
             <div>
                 <!-- Hay que poner el type del boton para que no haga submit automaticamente -->
                 <button type="submit" class="btn btn-primary" [disabled]="!authForm.valid">{{ isLogging ? 'Login' : 'Sign Up'}}</button> |   
-                <button type="button" class="btn btn-primary" (click)="onSwitchMode()">Swith to {{ isLogging ? 'Sign up' : 'Login'}} mode</button>
+                <button type="button" class="btn btn-primary" (click)="onSwitchMode()">Change to {{ isLogging ? 'Sign up' : 'Login'}} mode</button>
             </div>
         </form>
         <ng-template #loading >

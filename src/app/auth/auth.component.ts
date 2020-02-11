@@ -24,9 +24,10 @@ export class AuthComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  //true when you are in login mode, false when you are in sign up mode
   onSwitchMode() {
     this.isLogging = !this.isLogging;
+    console.log(this.isLogging);
   }
 
   onSubmit(form: NgForm) {
