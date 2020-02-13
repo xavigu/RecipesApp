@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
   private userSub: Subscription;
   isAuthenticated = false;
+  collapsed = false;
   authUser: User;
 
   //Este elemento hace referencia a la directiva añadida en el DOM
@@ -32,6 +33,10 @@ export class HeaderComponent implements OnInit, OnDestroy{
       this.isAuthenticated = !!userData; //Si no esta autenticado el user, la userData devuelta sería igual a null igual a (!userData ? false : true)
     })
     
+  }
+
+  onCollapsed(){
+    this.collapsed = !this.collapsed;
   }
 
   onSaveData(){
