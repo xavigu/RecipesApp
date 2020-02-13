@@ -59,3 +59,54 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - Habilitaremos la authentication a través de email en la página de authentication
 - Para obtener la API_KEY de nuestro backend de Firebase iremos a Configuracón del proyecto dandole a la rueda en la consola de Firebase.
 - Si queremos desplegar nuestro app en un Firebase hosting habrás que seguir estos [pasos](https://firebase.google.com/docs/hosting?hl=es)
+
+
+
+
+## Puntos presentación proyecto
+Aplicación para guardar recetas e ingredientes para la lista de la compra
+# Firebase
+- Creamos un proyecto en Firebase e integraremos la parte de:
+  database (guardar las recipes)
+  authentication (tipo de authentication email, usando API generada automaticamente)
+  hosting (sincronizando tu proyecto con Firebase y poder desplegar.)
+
+# Parte login
+- Componente **auth.Guard** para:
+   · redireccionarte a /auth cuando no estas logueado
+   · impedir acceder a ciertas rutas (recipes) si no estas
+- Componente **auth.service** para:
+   · peticiones http para Login y SignUp usando la API de nuestro proyecto de Firebase
+   · autologin cuando refrescas guardando token y manejo de errores
+- **AuthInterceptorService** para interceptar todas las peticiones http a la base de datos 
+  y añadir los headers de cuando te has autenticado
+- El propio **AuthComponent** para manejar la parte la autenticación según des al boton de login o signup y
+  navegues a /recipes si es correcto o te muestre un mensaje de error si es incorrecto
+
+  ## Parte Header
+  - Acceder a dos bloques principales (Recipes y shopping list)
+  - Logout (remueve el token del localStorage y redirecciona a ruta /auth)
+  - Save Data (Guardar en la database) y Fetch Data (que recoge las recetas guardadas en la database de Firebase). A traves del **data-storage.service**
+
+
+  ## Parte bloque Recipes
+  Esta formado por el componente general recipes, el cual esta dividido en dos componentes:
+  · RecipeList. El cual genera un array de recipe-item component por cada receta
+  · RecipeDetail. Que muestra los detalles de la recipe en la que hagas click recogiendo el id de la URL que 
+    esta asociado a cierta receta y te muestra los detalles
+    
+
+  - El **recipes-service** es el que permite la comunicación entre los componentes del bloque Recipes
+  - El componente **recipes-resolver.service** para estar subscrito al metodo FetchRecipes que te devuelve las 
+    recetas y poder navegar al id de ciertas recetas sin tener que recoger las recetas antes de la base de datos
+
+  - Luego en el RecipeDetail component tienes las funcionalidades de Editar una receta, eliminarla o añadir los 
+    ingredientes a la shopping list (un array de ingredientes)
+
+
+## Parte bloque Shopping list
+  Esta formado por dos componentes:
+  - El componente shopping-list principal que muestra una lista de los ingredientes que estarian añadidos para la 
+    compra 
+  - Y dentro de este estaria metido el shopping-edit componente que se trata basicamente de un formulario, con el cual puedes 
+    en un primer momento añadir ingredientes, pero si haces click sobre uno de los ingredientes del listado te da la opción de hacerle un update o eliminarlo.
