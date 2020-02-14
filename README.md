@@ -106,7 +106,6 @@ Aplicación para guardar recetas e ingredientes para la lista de la compra
 
 ## Parte bloque Shopping list
   Esta formado por dos componentes:
-  - El componente shopping-list principal que muestra una lista de los ingredientes que estarian añadidos para la 
-    compra 
+  - El componente shopping-list principal que muestra una lista de los ingredientes que estarian añadidos para la compra 
   - Y dentro de este estaria metido el shopping-edit componente que se trata basicamente de un formulario, con el cual puedes 
     en un primer momento añadir ingredientes, pero si haces click sobre uno de los ingredientes del listado te da la opción de hacerle un update o eliminarlo.
