@@ -1,5 +1,6 @@
 import { Component, OnInit, ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { AuthService, AuthResponseData } from './auth.service';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -9,7 +10,22 @@ import { PlaceholderDirective } from 'src/app/shared/placeholder.directive';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+  styleUrls: ['./auth.component.css'],
+  animations: [
+    trigger('authFadeIn', [
+      state('in', style({
+        opacity: 1,
+        transform: 'translateX(0)'
+      })),
+      transition('void => *', [
+        style({
+          opacity: 0,
+          transform: 'translateX(-200px)'
+        }),
+        animate(500)
+      ])
+    ]),
+  ]
 })
 export class AuthComponent implements OnInit {
 

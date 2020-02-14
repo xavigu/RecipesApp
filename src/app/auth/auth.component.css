@@ -1,0 +1,7 @@
+.auth-item{
+    float: none;
+    margin: 0 auto;
+    border: 4px outset rgba(204, 143, 0, 0.342);
+    border-radius: 25px;
+    padding: 12px 12px 24px 12px;
+}
