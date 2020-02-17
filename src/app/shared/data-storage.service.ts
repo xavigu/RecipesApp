@@ -4,6 +4,7 @@ import { RecipeService } from '../recipes/recipe.service';
 import { Recipe } from '../recipes/recipe.model';
 import { map, tap } from 'rxjs/operators'
 import { AuthService } from '../auth/auth.service';
+import Swal from 'sweetalert2'
 
 
 @Injectable({ providedIn: 'root'})
@@ -13,7 +14,11 @@ export class DataStorageService {
     storeRecipes() {
         const recipes = this.recipeService.getRecipes();
         if (recipes.length == 0) {
-            alert("NO RECIPES, FETCH DATA FIRST OR ADD A NEW RECIPE");
+            Swal.fire({
+                icon: 'warning',
+                title: 'Sorry!',
+                text: 'No recipes to save, Fetch Data first or Add New Recipe'
+            });
             return;
         } else {
             return this.http.put('https://ng-course-recipeapp.firebaseio.com/recipes.json', recipes)
@@ -33,10 +38,10 @@ export class DataStorageService {
                     };                   
                 });
             }),
-             tap(recipes => {
-                 this.recipeService.setRecipes(recipes);
-             })  //tap operator permite ejecutar un codigo sin alterar la data que esta siendo funneled a traves del observable)
-            )                
+            tap(recipes => {
+                this.recipeService.setRecipes(recipes);
+            }) //tap operator permite ejecutar un codigo sin alterar la data que esta siendo funneled a traves del observable)            
+        )                
     }
 }
 
