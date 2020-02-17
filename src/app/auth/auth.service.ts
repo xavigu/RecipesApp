@@ -15,6 +15,10 @@ export interface AuthResponseData{
   localId: string;
   registered?: boolean;
 }
+//Roles auth
+export enum Role {
+  ADMIN = 'admin@gmail.com'
+}
 
 @Injectable({
   providedIn: 'root'

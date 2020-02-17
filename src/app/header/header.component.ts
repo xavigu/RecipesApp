@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ComponentFactoryResolver, ViewChild} from '@angular/core';
 import { DataStorageService } from '../shared/data-storage.service';
-import { AuthService } from '../auth/auth.service';
+import { AuthService, Role } from '../auth/auth.service';
 import { AlertComponent } from 'src/app/shared/alert/alert.component';
 import { User } from '../auth/user.model';
 import { Subscription } from 'rxjs';
@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
   private userSub: Subscription;
   isAuthenticated = false;
+  isAdmin: boolean;
   collapsed = false;
   authUser: User;
 
@@ -31,8 +32,10 @@ export class HeaderComponent implements OnInit, OnDestroy{
   ngOnInit() {
     this.userSub = this.authService.user.subscribe(userData => {
       this.isAuthenticated = !!userData; //Si no esta autenticado el user, la userData devuelta sería igual a null igual a (!userData ? false : true)
-    })
-    
+      if (this.isAuthenticated) { //Si esta autenticado comprobamos si el email corresponde al del admin para mostrar la opcion de guardar data
+        this.isAdmin = (userData.email == Role.ADMIN) ? true : false        
+      }
+    });
   }
 
   onCollapsed(){
