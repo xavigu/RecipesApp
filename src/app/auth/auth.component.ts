@@ -4,8 +4,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { AuthService, AuthResponseData } from './auth.service';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { AlertComponent } from 'src/app/shared/alert/alert.component';
 import { PlaceholderDirective } from 'src/app/shared/placeholder.directive';
+import { AlertService } from '../shared/alert/alert.service';
 
 @Component({
   selector: 'app-auth',
@@ -34,9 +34,9 @@ export class AuthComponent implements OnInit {
   error: string = null;
   //le pasamos el placeholder directive como type y viewChild buscara la primera ocurrencia de esta directiva en el DOM
   @ViewChild(PlaceholderDirective, {static: false}) alertHost: PlaceholderDirective;
-  private closeSub: Subscription;
-
-  constructor(private authService: AuthService, private router: Router, private componentFactoryResolver :ComponentFactoryResolver) { }
+  constructor(private authService: AuthService, 
+              private router: Router,
+              private alertService: AlertService) { }
 
   ngOnInit() {
   }
@@ -71,31 +71,11 @@ export class AuthComponent implements OnInit {
       // This logic is better add in auth.service with catchError operator and throwError to convert to an observable 
       // (with the first subscribe you are observing the error)
       this.error = errorMessage;
-      this.showErrorAlert(errorMessage);
+      this.alertService.showErrorAlert(errorMessage, this.alertHost);
       this.isLoading = false;
     });
 
     form.reset();
-  };
-  
-  // closeModal(){
-  //   this.error = null;
-  // }
-
-  private showErrorAlert(message: string){
-    const alertCmpFactory =  this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
-    const hostViewContainerRef = this.alertHost.viewContainerRef;
-    //limpia todo el contenido que pueda ver en el container antes de añadir el alert component
-    hostViewContainerRef.clear();
-    //Referencia al alert component
-    const componentRef = hostViewContainerRef.createComponent(alertCmpFactory);
-    //Instancia del component pudiendo user las properties(variables) del alert component
-    componentRef.instance.message = message;
-    this.closeSub = componentRef.instance.close.subscribe(() => {
-      this.closeSub.unsubscribe();
-      hostViewContainerRef.clear();
-    })
-
-  }
+  }; 
 
 }
