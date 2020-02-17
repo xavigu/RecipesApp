@@ -12,12 +12,13 @@ export class RecipesResolverService implements Resolve<Recipe[]> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot ){
         const recipes = this.recipesService.getRecipes();
-        //solo se subscribe al fetchRecipes que hace el get del backend
-        //si el array de las Recipes esta a 0 porque no se ha fetcheado la data aun
+        //solo se subscribe al fetchRecipes que hace el get del backend si el array de las Recipes esta a 0 
+        //para poder cargar la URL de una receta en concreto aunque no esten cargadas las recipes
         if (recipes.length === 0) {
-            return this.dataStorageService.fetchRecipes();
+            return this.dataStorageService.fetchRecipes(); //No hace falta que se subscriba porque el metodo resolve hace esa función
         } else {
-            return recipes;
+            return recipes; //No hace el fetch de nuevo porque ya tiene cargadas las recetas y asi te permite editar una receta
+                            //(sino cargaría el fetchRecipes de nuevo y el edit no se llevaría a cabo)
         }       
     }
 }
