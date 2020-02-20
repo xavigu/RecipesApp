@@ -37,7 +37,7 @@ export class AuthService {
       email: email,
       password: password,
       returnSecureToken: true
-    }).pipe(catchError(this.handleError), tap(resData => { //tap nos permite realizar alguna accion sin cambiar la response
+    }).pipe(catchError(this.handleError), tap(resData => {
         this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
     })); 
 
@@ -49,7 +49,9 @@ export class AuthService {
       email: email,
       password: password,
       returnSecureToken: true
-      }).pipe(catchError(this.handleError), tap(resData => { //tap nos permite realizar alguna accion sin cambiar la response
+      //catchError recoge el error de un Observable
+      //this.handleError is a method that return with throwError an Observable that emits an error notification
+      }).pipe(catchError(this.handleError), tap(resData => { //tap nos permite realizar alguna accion con la data que llega sin cambiarla para cuando hagas el subscribe
         this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
       }));
   };
