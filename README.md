@@ -61,8 +61,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - Si queremos desplegar nuestro app en un Firebase hosting habrás que seguir estos [pasos](https://firebase.google.com/docs/hosting?hl=es)
 
 
-
-
 ## Puntos presentación proyecto
 Aplicación para guardar recetas e ingredientes para la lista de la compra
 # Firebase
