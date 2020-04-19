@@ -107,3 +107,7 @@ Aplicación para guardar recetas e ingredientes para la lista de la compra
   - El componente shopping-list principal que muestra una lista de los ingredientes que estarian añadidos para la compra 
   - Y dentro de este estaria metido el shopping-edit componente que se trata basicamente de un formulario, con el cual puedes 
     en un primer momento añadir ingredientes, pero si haces click sobre uno de los ingredientes del listado te da la opción de hacerle un update o eliminarlo.
+
+
+## Configure husky and prettier in an Angular application to standardize and automatize the code format
+ - [Link](https://www.daptontechnologies.com/angular-prettier-husky/)
