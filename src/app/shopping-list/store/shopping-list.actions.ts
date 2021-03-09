@@ -5,6 +5,8 @@ export const ADD_INGREDIENT = '[SHOPPING-LIST] ADD INGREDIENT'
 export const ADD_INGREDIENTS = '[SHOPPING-LIST] ADD INGREDIENTS'
 export const UPDATE_INGREDIENT = '[SHOPPING-LIST] UPDATE INGREDIENT'
 export const DELETE_INGREDIENT = '[SHOPPING-LIST] DELETE INGREDIENT'
+export const START_EDIT = '[SHOPPING-LIST] START EDIT'
+export const STOP_EDIT = '[SHOPPING-LIST] STOP EDIT'
 
 export class AddIngredient implements Action {
   // readonly to can not change from outside
@@ -27,5 +29,13 @@ export class DeleteIngredient implements Action {
 
   constructor(public payload: number) {}
 }
+export class StartEdit implements Action {
+  readonly type = START_EDIT
 
-export type ShoppingListActions = AddIngredient | AddIngredients | UpdateIngredient  | DeleteIngredient
+  constructor(public payload: number) {}
+}
+export class StopEdit implements Action {
+  readonly type = STOP_EDIT
+}
+
+export type ShoppingListActions = AddIngredient | AddIngredients | UpdateIngredient  | DeleteIngredient | StartEdit | StopEdit

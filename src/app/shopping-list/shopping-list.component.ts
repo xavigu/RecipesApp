@@ -5,6 +5,7 @@ import { Observable } from 'rxjs'
 import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Store } from '@ngrx/store'
 
+import * as ShoppingList from './store/shopping-list.actions'
 import * as fromShoppingList from './store/shopping-list.reducer'
 
 @Component({
@@ -60,7 +61,8 @@ export class ShoppingListComponent implements OnInit {
   }
 
   onEditItem(idx: number) {
-    this.shopService.startEditing.next(idx)
+    this.store.dispatch(new ShoppingList.StartEdit(idx))
+    // this.shopService.startEditing.next(idx)
   }
 
   // ngOnDestroy(): void {

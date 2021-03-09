@@ -1,5 +1,5 @@
 import { Ingredient } from '../../shared/ingredient.model'
-import { ADD_INGREDIENT, ADD_INGREDIENTS, DELETE_INGREDIENT, ShoppingListActions, UPDATE_INGREDIENT } from './shopping-list.actions'
+import { ADD_INGREDIENT, ADD_INGREDIENTS, DELETE_INGREDIENT, ShoppingListActions, START_EDIT, STOP_EDIT, UPDATE_INGREDIENT } from './shopping-list.actions'
 
 export interface State {
   ingredients: Ingredient[];
@@ -12,8 +12,8 @@ export interface AppState {
 
 const initialState: State = {
   ingredients: [new Ingredient('Apples', 20),new Ingredient('Tomatoes', 15), new Ingredient('Oranges', 2)],
-  editedIngredient: null,
-  editedIngredientIndex: -1
+  editedIngredientIndex: -1,
+  editedIngredient: null
 };
 
 export function shoppingListReducer(
@@ -48,6 +48,18 @@ export function shoppingListReducer(
       return {
         ...state,
         ingredients: state.ingredients.filter((ingredient, ingrIndex) => ingrIndex !== action.payload)
+      };
+    case START_EDIT:
+      return {
+        ...state,
+        editedIngredientIndex: action.payload,
+        editedIngredient: {...state.ingredients[action.payload]}
+      };
+    case STOP_EDIT:
+      return {
+        ...state,
+        editedIngredientIndex: -1,
+        editedIngredient: null
       };
     default:
       return state
