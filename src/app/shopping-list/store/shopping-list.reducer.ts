@@ -1,5 +1,5 @@
 import { Ingredient } from '../../shared/ingredient.model'
-import { ADD_INGREDIENT, ShoppingListActions } from './shopping-list.actions'
+import { ADD_INGREDIENT, ADD_INGREDIENTS, ShoppingListActions } from './shopping-list.actions'
 
 export interface State {
   ingredients: Ingredient[]
@@ -22,6 +22,11 @@ export function shoppingListReducer(
       return {
         ...state,
         ingredients: [...state.ingredients, action.payload],
+      };
+    case ADD_INGREDIENTS:
+      return {
+        ...state,
+        ingredients: [...state.ingredients, ...action.payload],
       }
     default:
       return state
