@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs'
 import { Ingredient } from 'src/app/shared/ingredient.model'
 import { ShoppingListService } from '../shopping-list.service'
 import * as ShoppingList from '../store/shopping-list.actions'
+import * as fromShoppingList from '../store/shopping-list.reducer'
 
 @Component({
   selector: 'app-shopping-edit',
@@ -18,7 +19,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   editedItemIndex: number
   editedItem: Ingredient
 
-  constructor(private shopService: ShoppingListService, private store: Store<{shoppingList: { ingredients: Ingredient[]}}>) {}
+  constructor(private shopService: ShoppingListService, private store: Store<fromShoppingList.AppState>) {}
 
   ngOnInit() {
     this.subscription = this.shopService.startEditing.subscribe(
@@ -41,13 +42,15 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       this.store.dispatch(new ShoppingList.AddIngredient(newIngredient))
       // this.shopService.addIngredient(newIngredient)
     } else {
-      this.shopService.updateIngredient(this.editedItemIndex, newIngredient)
+      this.store.dispatch(new ShoppingList.UpdateIngredient({index: this.editedItemIndex, ingredient: newIngredient}))
+      // this.shopService.updateIngredient(this.editedItemIndex, newIngredient)
     }
     this.onClear()
   }
 
   onDelete() {
-    this.shopService.deleteIngredient(this.editedItemIndex)
+    this.store.dispatch(new ShoppingList.DeleteIngredient(this.editedItemIndex))
+    // this.shopService.deleteIngredient(this.editedItemIndex)
     this.onClear()
   }
 

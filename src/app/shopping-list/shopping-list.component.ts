@@ -5,6 +5,8 @@ import { Observable } from 'rxjs'
 import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Store } from '@ngrx/store'
 
+import * as fromShoppingList from './store/shopping-list.reducer'
+
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
@@ -44,7 +46,7 @@ export class ShoppingListComponent implements OnInit {
   ingredients: Ingredient[]
   ingredients$: Observable<{ ingredients: Ingredient[]}>
 
-  constructor(private shopService: ShoppingListService, private store: Store<{shoppingList: { ingredients: Ingredient[]}}>) {}
+  constructor(private shopService: ShoppingListService, private store: Store<fromShoppingList.AppState>) {}
 
   ngOnInit() {
     this.ingredients$ = this.store.select('shoppingList')

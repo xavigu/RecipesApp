@@ -6,6 +6,7 @@ import { Subject } from 'rxjs'
 import { Store } from '@ngrx/store'
 
 import * as ShoppingList from '../shopping-list/store/shopping-list.actions'
+import * as fromShoppingList from '../shopping-list/store/shopping-list.reducer'
 @Injectable({
   providedIn: 'root',
 })
@@ -14,7 +15,7 @@ export class RecipeService {
   // Array de recipes object
   private recipes: Recipe[] = []
 
-  constructor(private shopService: ShoppingListService, private store: Store<{shoppingList: { ingredients: Ingredient[]}}>) {}
+  constructor(private shopService: ShoppingListService, private store: Store<fromShoppingList.AppState>) {}
 
   // Function to overwrite recipes array when we fetch Data
   setRecipes(recipes: Recipe[]) {
