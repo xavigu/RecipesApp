@@ -10,12 +10,6 @@
     "lint:fix": "tslint --project ./ --fix",
     "e2e": "ng e2e"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged && ng lint",
-      "pre-push": "ng build --aot true"
-    }
-  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~8.2.14",
