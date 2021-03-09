@@ -23,7 +23,7 @@ export class RecipeService {
 
   getRecipes() {
     return this.recipes.slice()
-    // Usamos slice para no manejar el array recipes desde fuera, solamente obtener una copia
+    // Usamos slice para manejar una copia del array recipes desde fuera
   }
 
   getRecipe(id: number) {
