@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core'
 import { Ingredient } from '../shared/ingredient.model'
-import { ShoppingListService } from './shopping-list.service'
 import { Observable } from 'rxjs'
 import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Store } from '@ngrx/store'
@@ -47,25 +46,14 @@ export class ShoppingListComponent implements OnInit {
   ingredients: Ingredient[]
   ingredients$: Observable<{ ingredients: Ingredient[]}>
 
-  constructor(private shopService: ShoppingListService, private store: Store<fromShoppingList.AppState>) {}
+  constructor(private store: Store<fromShoppingList.AppState>) {}
 
   ngOnInit() {
     this.ingredients$ = this.store.select('shoppingList')
-
-    // this.ingredients = this.shopService.getIngredients()
-    // this.ingSubscription = this.shopService.ingredientsChanged.subscribe(
-    //   (ingredients: Ingredient[]) => {
-    //     this.ingredients = ingredients
-    //   }
-    // )
   }
 
   onEditItem(idx: number) {
     this.store.dispatch(new ShoppingList.StartEdit(idx))
-    // this.shopService.startEditing.next(idx)
   }
 
-  // ngOnDestroy(): void {
-  //   this.ingSubscription.unsubscribe()
-  // }
 }

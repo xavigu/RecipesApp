@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Recipe } from './recipe.model'
 import { Ingredient } from '../shared/ingredient.model'
-import { ShoppingListService } from '../shopping-list/shopping-list.service'
 import { Subject } from 'rxjs'
 import { Store } from '@ngrx/store'
 
@@ -15,7 +14,7 @@ export class RecipeService {
   // Array de recipes object
   private recipes: Recipe[] = []
 
-  constructor(private shopService: ShoppingListService, private store: Store<fromShoppingList.AppState>) {}
+  constructor(private store: Store<fromShoppingList.AppState>) {}
 
   // Function to overwrite recipes array when we fetch Data
   setRecipes(recipes: Recipe[]) {
@@ -49,7 +48,6 @@ export class RecipeService {
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
-    // this.shopService.addIngredients(ingredients)
     this.store.dispatch(new ShoppingList.AddIngredients(ingredients))
   }
 }
