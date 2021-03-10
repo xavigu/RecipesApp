@@ -13,6 +13,11 @@ import { Router } from '@angular/router'
 import { PlaceholderDirective } from '../shared/placeholder.directive'
 import { AlertService } from '../shared/alert/alert.service'
 
+import * as fromApp from '../store/app.reducer'
+import { Store } from '@ngrx/store'
+import { map } from 'rxjs/operators'
+
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -34,11 +39,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private dataStorageService: DataStorageService,
     private authService: AuthService,
     private alertService: AlertService,
+    private store: Store<fromApp.AppState>,
     private router: Router
   ) {}
 
   ngOnInit() {
-    this.userSub = this.authService.user.subscribe((userData) => {
+    this.userSub = this.store.select('auth').pipe(map(authState => authState.user)).subscribe((userData) => 
+    {
       this.isAuthenticated = !!userData // Si no esta autenticado el user, la userData devuelta sería igual a null igual a (!userData ? false : true)
       if (this.isAuthenticated) {
         // Si esta autenticado comprobamos si el email corresponde al del admin para mostrar la opcion de guardar data

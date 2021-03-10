@@ -29,7 +29,7 @@ export enum Role {
 })
 export class AuthService {
   private tokenExpirationTimer: any
-  user = new BehaviorSubject<User>(null)
+  // user = new BehaviorSubject<User>(null)
 
   constructor(private http: HttpClient, private router: Router, private store: Store<fromApp.AppState>) {}
 
