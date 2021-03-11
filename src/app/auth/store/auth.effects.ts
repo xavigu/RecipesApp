@@ -22,6 +22,11 @@ export class AuthEffects {
   constructor(private actions$: Actions, private http: HttpClient, private router: Router){}
 
   @Effect()
+  authSignup = this.actions$.pipe(
+    ofType(AuthActions.SIGNUP_START)
+  );
+
+  @Effect()
   authLogin = this.actions$.pipe(
     ofType(AuthActions.LOGIN_START),
     switchMap((authData: AuthActions.LoginStart) => {
@@ -37,7 +42,7 @@ export class AuthEffects {
       ).pipe(
           map(resData => {
             const expirationDate = new Date(new Date().getTime() + +resData.expiresIn * 1000);
-            return new AuthActions.Login({
+            return new AuthActions.AuthenticationSuccess({
                 email: resData.email, 
                 id: resData.localId, 
                 token: resData.idToken, 
@@ -47,7 +52,7 @@ export class AuthEffects {
           catchError(errorRes => {
             let errorMessage = 'An unknown error occured'
             if (!errorRes.error || !errorRes.error.error) {
-              return of(new AuthActions.LoginFail(errorMessage));
+              return of(new AuthActions.AuthenticationFail(errorMessage));
             }
             switch (errorRes.error.error.message) {
               case 'EMAIL_EXISTS':
@@ -74,7 +79,7 @@ export class AuthEffects {
               default:
                 break
             }
-            return of(new AuthActions.LoginFail(errorMessage));
+            return of(new AuthActions.AuthenticationFail(errorMessage));
           })
         );
     }),
@@ -83,7 +88,7 @@ export class AuthEffects {
   // to say to NgRx that is not an effect that dispatch an action inside you need pass dispatch: false
   @Effect({dispatch: false})
   authSuccess = this.actions$.pipe(
-    ofType(AuthActions.LOGIN),
+    ofType(AuthActions.AUTHENTICATION_SUCCESS),
     tap(() => {
       this.router.navigate(['/']);
     })
