@@ -42,4 +42,4 @@ export class Logout implements Action {
   readonly type = LOGOUT
 }
 
-export type AuthActions = LoginStart |SignupStart | AuthenticationSuccess| AuthenticationFail | Logout;
+export type AuthActions = LoginStart | SignupStart | AuthenticationSuccess| AuthenticationFail | Logout;
