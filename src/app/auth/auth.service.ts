@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { Router } from '@angular/router'
 import { catchError, tap } from 'rxjs/operators'
-import { throwError, BehaviorSubject } from 'rxjs'
+import { throwError } from 'rxjs'
 import { Store } from '@ngrx/store'
 
 import { User } from './user.model'
@@ -67,11 +67,10 @@ export class AuthService {
           email,
           password,
           returnSecureToken: true,
-          // catchError recoge el error de un Observable
-          // this.handleError is a method that return with throwError an Observable that emits an error notification
-        }
-      )
-      .pipe(
+        })
+        .pipe(
+        // catchError recoge el error de un Observable y no permitiria seguir con la logica añadida en el tap
+        // this.handleError is a method that return with throwError an Observable that emits an error notification
         catchError(this.handleError),
         tap((resData) => {
           // tap nos permite realizar alguna accion con la data que llega sin cambiarla para cuando hagas el subscribe
