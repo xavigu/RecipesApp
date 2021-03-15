@@ -120,6 +120,14 @@ export class AuthEffects {
     })
   )
 
+  @Effect({dispatch: false})
+  authRedirect = this.actions$.pipe(
+    ofType(AuthActions.LOGOUT),
+    tap(() => {
+      this.router.navigate(['/auth']);
+    })
+  )
+
 
 }
 

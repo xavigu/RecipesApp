@@ -5,18 +5,19 @@ import {
   ComponentFactoryResolver,
   ViewChild,
 } from '@angular/core'
+import { Router } from '@angular/router'
+import { Store } from '@ngrx/store'
+import { map } from 'rxjs/operators'
+import { Subscription } from 'rxjs'
+
 import { DataStorageService } from '../shared/data-storage.service'
 import { AuthService, Role } from '../auth/auth.service'
 import { User } from '../auth/user.model'
-import { Subscription } from 'rxjs'
-import { Router } from '@angular/router'
 import { PlaceholderDirective } from '../shared/placeholder.directive'
 import { AlertService } from '../shared/alert/alert.service'
 
 import * as fromApp from '../store/app.reducer'
-import { Store } from '@ngrx/store'
-import { map } from 'rxjs/operators'
-
+import * as Auth from '../auth/store/auth.actions'
 
 @Component({
   selector: 'app-header',
@@ -75,7 +76,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
-    this.authService.logout()
+    this.store.dispatch(new Auth.Logout())
   }
 
   ngOnDestroy() {

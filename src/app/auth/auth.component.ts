@@ -1,5 +1,6 @@
 import {
   Component,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core'
@@ -11,6 +12,7 @@ import { PlaceholderDirective } from 'src/app/shared/placeholder.directive'
 import { AlertService } from '../shared/alert/alert.service'
 import * as fromApp  from '../store/app.reducer'
 import * as AuthActions from './store/auth.actions'
+import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'app-auth',
@@ -35,10 +37,11 @@ import * as AuthActions from './store/auth.actions'
     ]),
   ],
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
   isLogging = true
   isLoading = false
   error: string = null
+  private storeSub: Subscription
   // le pasamos el placeholder directive como type y viewChild buscara la primera ocurrencia de esta directiva en el DOM
   @ViewChild(PlaceholderDirective, { static: false })
   alertHost: PlaceholderDirective
@@ -48,7 +51,7 @@ export class AuthComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.store.select('auth').subscribe(authState => {
+    this.storeSub = this.store.select('auth').subscribe(authState => {
       this.isLoading = authState.loading;
       this.error = authState.authError;
       if (this.error) {
@@ -78,5 +81,11 @@ export class AuthComponent implements OnInit {
     }
 
     form.reset()
+  }
+
+  ngOnDestroy(): void {
+    if (this.storeSub) {
+      this.storeSub.unsubscribe();
+    }
   }
 }
