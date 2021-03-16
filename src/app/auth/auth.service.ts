@@ -4,15 +4,6 @@ import { Store } from '@ngrx/store'
 import * as fromApp from '../store/app.reducer'
 import * as AuthActions from './store/auth.actions'
 
-// Interface con el contenido que se espera de la signup respuesta
-export interface AuthResponseData {
-  idToken: string
-  email: string
-  refreshToken: string
-  expiresIn: string
-  localId: string
-  registered?: boolean
-}
 // Roles auth
 export enum Role {
   ADMIN = 'admin@gmail.com',
