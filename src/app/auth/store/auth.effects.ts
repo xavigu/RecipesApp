@@ -6,6 +6,7 @@ import { of, throwError } from "rxjs";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 
 import { environment } from "src/environments/environment";
+import { AuthService } from "../auth.service";
 import { User } from "../user.model";
 import * as AuthActions from "./auth.actions";
 
@@ -79,6 +80,9 @@ export class AuthEffects {
           password: signupData.payload.password,
           returnSecureToken: true,
         }).pipe(
+          tap(resData => {
+            this.authService.setLogoutTimer(+resData.expiresIn * 1000)
+          }),
           map(resData => {
             return handleAuthentication(+resData.expiresIn, resData.email, resData.localId, resData.idToken)
           }),
@@ -103,6 +107,9 @@ export class AuthEffects {
           returnSecureToken: true,
         }
       ).pipe(
+          tap(resData => {
+            this.authService.setLogoutTimer(+resData.expiresIn * 1000)
+          }),        
           map(resData => {
             return handleAuthentication(+resData.expiresIn, resData.email, resData.localId, resData.idToken)
           }),
@@ -133,15 +140,16 @@ export class AuthEffects {
         new Date(userData._tokenExpirationDate)
       );
       if (loadedUser.token) {
+        const expirationDuration =
+          new Date(userData._tokenExpirationDate).getTime() - new Date().getTime(); // getTime from seconds to miliseconds
+        this.authService.setLogoutTimer(expirationDuration);
+
         return new AuthActions.AuthenticationSuccess({
             email: loadedUser.email, 
             id: loadedUser.id, 
             token: loadedUser.token, 
             expirationDate: new Date(userData._tokenExpirationDate)
           })
-        // const expirationDuration =
-        //   new Date(userData._tokenExpirationDate).getTime() - new Date().getTime() // getTime from seconds to miliseconds
-        // this.autoLogout(expirationDuration)
       }
       return { type: 'DUMMY'}
     })
@@ -149,7 +157,7 @@ export class AuthEffects {
 
   // to say to NgRx that is not an effect that dispatch an action inside you need pass dispatch: false
   @Effect({dispatch: false})
-  authSuccess = this.actions$.pipe(
+  authRedirect = this.actions$.pipe(
     ofType(AuthActions.AUTHENTICATION_SUCCESS),
     tap(() => {
       this.router.navigate(['/']);
@@ -161,10 +169,11 @@ export class AuthEffects {
     ofType(AuthActions.LOGOUT),
     tap(() => {
       localStorage.removeItem('userData');
+      this.authService.clearLogoutTimer();
       this.router.navigate(['/auth']);
     })
   )
 
-  constructor(private actions$: Actions, private http: HttpClient, private router: Router){}
+  constructor(private actions$: Actions, private http: HttpClient, private router: Router, private authService: AuthService){}
 }
 
