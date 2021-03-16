@@ -37,7 +37,6 @@ export class AuthService {
   logout() {
     // this.user.next(null)
     this.store.dispatch(new Auth.Logout())
-    localStorage.removeItem('dataUser')
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer)
     }
