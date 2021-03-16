@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { StoreModule } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 import { AppRoutingModule } from './app-routing.module'
 import { SharedModule } from './shared/shared.module'
@@ -14,6 +15,7 @@ import { HeaderComponent } from './header/header.component'
 
 import * as fromApp  from './store/app.reducer'
 import { AuthEffects } from './auth/store/auth.effects'
+import { environment } from 'src/environments/environment'
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -23,6 +25,7 @@ import { AuthEffects } from './auth/store/auth.effects'
     AppRoutingModule,
     StoreModule.forRoot(fromApp.appReducer),
     EffectsModule.forRoot([AuthEffects]),
+    StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     BrowserAnimationsModule,
     SharedModule,
     CoreModule,
