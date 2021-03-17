@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
+import { Store } from '@ngrx/store'
+import Swal from 'sweetalert2'
+import { map, tap } from 'rxjs/operators'
+
 import { RecipeService } from '../recipes/recipe.service'
 import { Recipe } from '../recipes/recipe.model'
-import { map, tap } from 'rxjs/operators'
-import { AuthService } from '../auth/auth.service'
-import Swal from 'sweetalert2'
+import * as fromApp from '../store/app.reducer'
+import * as RecipeActions from '../recipes/store/recipes.actions'
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
   constructor(
     private http: HttpClient,
     private recipeService: RecipeService,
-    private authService: AuthService
+    private store: Store<fromApp.AppState>
   ) {}
   // Nos subscribimos directamente en el metodo que hace la put request porque no estamos interesados en la respuesta
   storeRecipes() {
@@ -47,7 +50,8 @@ export class DataStorageService {
           })
         }),
         tap((recipes) => {
-          this.recipeService.setRecipes(recipes)
+          this.store.dispatch(new RecipeActions.SetRecipes(recipes))
+          // this.recipeService.setRecipes(recipes)
         }) // tap operator permite ejecutar un codigo sin alterar la data que esta siendo funneled a traves del observable)
       )
   }
