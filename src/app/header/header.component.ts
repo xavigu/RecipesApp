@@ -17,7 +17,8 @@ import { PlaceholderDirective } from '../shared/placeholder.directive'
 import { AlertService } from '../shared/alert/alert.service'
 
 import * as fromApp from '../store/app.reducer'
-import * as Auth from '../auth/store/auth.actions'
+import * as AuthActions from '../auth/store/auth.actions'
+import * as RecipeActions from '../recipes/store/recipes.actions'
 
 @Component({
   selector: 'app-header',
@@ -64,19 +65,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onFetchData() {
-    this.dataStorageService.fetchRecipes().subscribe(
-      (res) => console.log('Fetch response: ', res),
-      () => {
-        this.alertService.showErrorAlert(
-          'There is not recipes in the database',
-          this.alertHost
-        )
-      }
-    )
+    this.store.dispatch(new RecipeActions.FetchRecipes());
+    // this.dataStorageService.fetchRecipes().subscribe(
+    //   (res) => console.log('Fetch response: ', res),
+    //   () => {
+    //     this.alertService.showErrorAlert(
+    //       'There is not recipes in the database',
+    //       this.alertHost
+    //     )
+    //   }
+    // )
   }
 
   onLogout() {
-    this.store.dispatch(new Auth.Logout())
+    this.store.dispatch(new AuthActions.Logout())
   }
 
   ngOnDestroy() {
