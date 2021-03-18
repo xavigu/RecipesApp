@@ -14,7 +14,8 @@ export class AuthenticationSuccess implements Action {
     email: string;
     id: string;
     token: string;
-    expirationDate: Date
+    expirationDate: Date;
+    redirect: boolean;
   }) {}
 }
 export class AuthenticationFail implements Action {
