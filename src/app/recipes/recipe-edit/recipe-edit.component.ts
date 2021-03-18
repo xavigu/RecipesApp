@@ -1,26 +1,27 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Params, Router } from '@angular/router'
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { map } from 'rxjs/operators'
+import { Subscription } from 'rxjs'
 
 import * as fromApp from '../../store/app.reducer'
-import { RecipeService } from '../recipe.service'
 import { Recipe } from '../recipe.model'
+import * as RecipesActions from '../store/recipes.actions'
 
 @Component({
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html',
   styleUrls: ['./recipe-edit.component.css'],
 })
-export class RecipeEditComponent implements OnInit {
+export class RecipeEditComponent implements OnInit, OnDestroy {
   id: number
   editMode = false
   recipeForm: FormGroup
+  private storeSub: Subscription
 
   constructor(
     private route: ActivatedRoute,
-    private recipeService: RecipeService,
     private router: Router,
     private store: Store<fromApp.AppState>
   ) {}
@@ -38,9 +39,11 @@ export class RecipeEditComponent implements OnInit {
     // Al llamarse igual las variables a los atributos al modelo no hace falta seguir este enfoque y simplemente pasarle el recipeForm.value que tiene la misma estructura que el modelo
     console.log(this.recipeForm)
     if (this.editMode) {
-      this.recipeService.updateRecipe(this.id, this.recipeForm.value)
+      this.store.dispatch(new RecipesActions.UpdateRecipe({index: this.id, newRecipe: this.recipeForm.value}))
+      // this.recipeService.updateRecipe(this.id, this.recipeForm.value)
     } else {
-      this.recipeService.addRecipe(this.recipeForm.value)
+      this.store.dispatch(new RecipesActions.AddRecipe(this.recipeForm.value))
+      // this.recipeService.addRecipe(this.recipeForm.value)
     }
     this.goBack()
   }
@@ -75,6 +78,7 @@ export class RecipeEditComponent implements OnInit {
     let recipeDescription = ''
     const recipeIngredients = new FormArray([])
     if (this.editMode) {
+      this.storeSub = 
       this.store.select('recipes').pipe(
         map(recipeState => {
           return recipeState.recipes.find((recipe, index) => {
@@ -99,7 +103,6 @@ export class RecipeEditComponent implements OnInit {
             }
           }
       })
-      // const recipe = this.recipeService.getRecipe(this.id)
     }
     this.recipeForm = new FormGroup({
       name: new FormControl(recipeName, Validators.required),
@@ -112,5 +115,11 @@ export class RecipeEditComponent implements OnInit {
   get controls() {
     // a getter
     return (this.recipeForm.get('ingredients') as FormArray).controls
+  }
+
+  ngOnDestroy(): void {
+    if (this.storeSub) {
+      this.storeSub.unsubscribe()
+    }
   }
 }
