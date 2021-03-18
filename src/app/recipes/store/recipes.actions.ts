@@ -2,7 +2,9 @@ import { Action } from '@ngrx/store'
 import { Recipe } from '../recipe.model';
 
 export const SET_RECIPES = '[RECIPE] SET RECIPES'
+
 export const FETCH_RECIPES = '[RECIPE] FETCH RECIPES'
+export const STORE_RECIPES = '[RECIPE] STORE RECIPES'
 
 export const ADD_RECIPE = '[RECIPE] ADD RECIPE'
 export const UPDATE_RECIPE = '[RECIPE] UPDATE RECIPE'
@@ -16,6 +18,9 @@ export class SetRecipes implements Action {
 
 export class FetchRecipes implements Action {
   readonly type = FETCH_RECIPES
+}
+export class StoreRecipes implements Action {
+  readonly type = STORE_RECIPES
 }
 
 export class AddRecipe implements Action {
@@ -38,4 +43,4 @@ export class DeleteRecipe implements Action {
 
 
 
-export type RecipeActions =  SetRecipes | FetchRecipes | AddRecipe | UpdateRecipe | DeleteRecipe;
+export type RecipeActions =  SetRecipes | FetchRecipes | StoreRecipes | AddRecipe | UpdateRecipe | DeleteRecipe;

@@ -5,13 +5,11 @@ import {
   ComponentFactoryResolver,
   ViewChild,
 } from '@angular/core'
-import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { map } from 'rxjs/operators'
 import { Subscription } from 'rxjs'
 
-import { DataStorageService } from '../shared/data-storage.service'
-import { AuthService, Role } from '../auth/auth.service'
+import { Role } from '../auth/auth.service'
 import { User } from '../auth/user.model'
 import { PlaceholderDirective } from '../shared/placeholder.directive'
 import { AlertService } from '../shared/alert/alert.service'
@@ -35,14 +33,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   // Este elemento hace referencia a la directiva añadida en el DOM
   @ViewChild(PlaceholderDirective, { static: false })
   alertHost: PlaceholderDirective
-  private closeSub: Subscription
 
   constructor(
-    private dataStorageService: DataStorageService,
-    private authService: AuthService,
     private alertService: AlertService,
     private store: Store<fromApp.AppState>,
-    private router: Router
   ) {}
 
   ngOnInit() {
@@ -61,7 +55,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onSaveData() {
-    this.dataStorageService.storeRecipes()
+    this.store.dispatch(new RecipeActions.StoreRecipes());
+    // this.dataStorageService.storeRecipes()
   }
 
   onFetchData() {
