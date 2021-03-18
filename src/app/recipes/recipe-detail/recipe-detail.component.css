@@ -1,5 +1,5 @@
 .recipe-image{
     border: 4px outset rgba(204,143,0,0.5);
     border-radius: 25px;
-
+    margin: 0 auto;
 }
