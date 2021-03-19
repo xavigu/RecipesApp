@@ -36,14 +36,13 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    // Al llamarse igual las variables a los atributos al modelo no hace falta seguir este enfoque y simplemente pasarle el recipeForm.value que tiene la misma estructura que el modelo
+    // Al llamarse igual las variables a los atributos al modelo no hace falta seguir este enfoque y
+    // simplemente pasarle el recipeForm.value que tiene la misma estructura que el modelo
     console.log(this.recipeForm)
     if (this.editMode) {
       this.store.dispatch(new RecipesActions.UpdateRecipe({index: this.id, newRecipe: this.recipeForm.value}))
-      // this.recipeService.updateRecipe(this.id, this.recipeForm.value)
     } else {
       this.store.dispatch(new RecipesActions.AddRecipe(this.recipeForm.value))
-      // this.recipeService.addRecipe(this.recipeForm.value)
     }
     this.goBack()
   }

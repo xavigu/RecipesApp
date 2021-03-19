@@ -56,7 +56,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onSaveData() {
     this.store.dispatch(new RecipeActions.StoreRecipes());
-    // this.dataStorageService.storeRecipes()
   }
 
   onFetchData() {
