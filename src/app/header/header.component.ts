@@ -5,13 +5,18 @@ import {
   ComponentFactoryResolver,
   ViewChild,
 } from '@angular/core'
-import { DataStorageService } from '../shared/data-storage.service'
-import { AuthService, Role } from '../auth/auth.service'
-import { User } from '../auth/user.model'
+import { Store } from '@ngrx/store'
+import { map } from 'rxjs/operators'
 import { Subscription } from 'rxjs'
-import { Router } from '@angular/router'
+
+import { Role } from '../auth/auth.service'
+import { User } from '../auth/user.model'
 import { PlaceholderDirective } from '../shared/placeholder.directive'
 import { AlertService } from '../shared/alert/alert.service'
+
+import * as fromApp from '../store/app.reducer'
+import * as AuthActions from '../auth/store/auth.actions'
+import * as RecipeActions from '../recipes/store/recipes.actions'
 
 @Component({
   selector: 'app-header',
@@ -28,17 +33,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   // Este elemento hace referencia a la directiva añadida en el DOM
   @ViewChild(PlaceholderDirective, { static: false })
   alertHost: PlaceholderDirective
-  private closeSub: Subscription
 
   constructor(
-    private dataStorageService: DataStorageService,
-    private authService: AuthService,
     private alertService: AlertService,
-    private router: Router
+    private store: Store<fromApp.AppState>,
   ) {}
 
   ngOnInit() {
-    this.userSub = this.authService.user.subscribe((userData) => {
+    this.userSub = this.store.select('auth').pipe(map(authState => authState.user)).subscribe((userData) => 
+    {
       this.isAuthenticated = !!userData // Si no esta autenticado el user, la userData devuelta sería igual a null igual a (!userData ? false : true)
       if (this.isAuthenticated) {
         // Si esta autenticado comprobamos si el email corresponde al del admin para mostrar la opcion de guardar data
@@ -52,23 +55,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onSaveData() {
-    this.dataStorageService.storeRecipes()
+    this.store.dispatch(new RecipeActions.StoreRecipes());
   }
 
   onFetchData() {
-    this.dataStorageService.fetchRecipes().subscribe(
-      (res) => console.log('Fetch response: ', res),
-      () => {
-        this.alertService.showErrorAlert(
-          'There is not recipes in the database',
-          this.alertHost
-        )
-      }
-    )
+    this.store.dispatch(new RecipeActions.FetchRecipes());
+    // this.dataStorageService.fetchRecipes().subscribe(
+    //   (res) => console.log('Fetch response: ', res),
+    //   () => {
+    //     this.alertService.showErrorAlert(
+    //       'There is not recipes in the database',
+    //       this.alertHost
+    //     )
+    //   }
+    // )
   }
 
   onLogout() {
-    this.authService.logout()
+    this.store.dispatch(new AuthActions.Logout())
   }
 
   ngOnDestroy() {
