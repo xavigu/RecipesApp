@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core'
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router'
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' }, // Te redirija a /recipes si el path entero es vacio
@@ -9,7 +9,7 @@ const appRoutes: Routes = [
     loadChildren: './shopping-list/shopping-list.module#ShoppingListModule',
   },
   { path: 'auth', loadChildren: './auth/auth.module#AuthModule' },
-]
+];
 
 @NgModule({
   imports: [

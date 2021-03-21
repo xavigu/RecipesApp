@@ -12,5 +12,5 @@ export interface AppState {
 export const appReducer: ActionReducerMap<AppState> = {
   shoppingList: fromShoppingList.shoppingListReducer,
   recipes: fromRecipes.recipeReducer,
-  auth: fromAuth.authReducer
-}
+  auth: fromAuth.authReducer,
+};

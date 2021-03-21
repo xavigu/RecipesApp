@@ -1,4 +1,4 @@
-import { Directive, ElementRef, ViewContainerRef } from '@angular/core'
+import { Directive, ElementRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
   selector: '[appPlaceholder]',

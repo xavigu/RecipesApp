@@ -11,8 +11,8 @@ export class User {
   get token() {
     // condition para saber si el tokenexpiration no existe o el tiempo ya ha pasado
     if (!this._tokenExpirationDate || new Date() > this._tokenExpirationDate) {
-      return null
+      return null;
     }
-    return this._token
+    return this._token;
   }
 }

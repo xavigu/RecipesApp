@@ -1,14 +1,14 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Actions, Effect, ofType } from "@ngrx/effects";
-import { Store } from "@ngrx/store";
-import { map, switchMap, withLatestFrom } from "rxjs/operators";
-import Swal from 'sweetalert2'
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import { map, switchMap, withLatestFrom } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
-import { Recipe } from "../recipe.model";
+import { Recipe } from '../recipe.model';
 
-import * as RecipeActions from "./recipes.actions";
-import * as fromApp from "../../store/app.reducer"
+import * as RecipeActions from './recipes.actions';
+import * as fromApp from '../../store/app.reducer';
 
 @Injectable()
 export class RecipeEffects {
@@ -16,8 +16,9 @@ export class RecipeEffects {
   fetchRecipes = this.actions$.pipe(
     ofType(RecipeActions.FETCH_RECIPES),
     switchMap(() => {
-      return this.http
-      .get<Recipe[]>('https://ng-course-recipeapp.firebaseio.com/recipes.json')
+      return this.http.get<Recipe[]>(
+        'https://ng-course-recipeapp.firebaseio.com/recipes.json'
+      );
     }),
     map((recipes) => {
       // TODO Meter logica de que muestre un error si no hay database de recipes
@@ -29,13 +30,13 @@ export class RecipeEffects {
         return {
           ...recipe,
           ingredients: recipe.ingredients ? recipe.ingredients : [],
-        }
-      })
+        };
+      });
     }),
-    map(recipes => {
-      return new RecipeActions.SetRecipes(recipes)
+    map((recipes) => {
+      return new RecipeActions.SetRecipes(recipes);
     })
-  )
+  );
 
   @Effect({ dispatch: false })
   storeRecipes = this.actions$.pipe(
@@ -49,14 +50,20 @@ export class RecipeEffects {
           icon: 'warning',
           title: 'Sorry!',
           text: 'No recipes to save, Fetch Data first or Add New Recipe',
-        })
-        return
+        });
+        return;
       } else {
-        return this.http
-          .put('https://ng-course-recipeapp.firebaseio.com/recipes.json', recipes)
+        return this.http.put(
+          'https://ng-course-recipeapp.firebaseio.com/recipes.json',
+          recipes
+        );
       }
     })
-  )
+  );
 
-  constructor(private actions$: Actions, private http: HttpClient , private store: Store<fromApp.AppState>){}
+  constructor(
+    private actions$: Actions,
+    private http: HttpClient,
+    private store: Store<fromApp.AppState>
+  ) {}
 }
