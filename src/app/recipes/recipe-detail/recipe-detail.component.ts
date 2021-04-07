@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 import { Store } from '@ngrx/store';
 import { map, switchMap } from 'rxjs/operators';
 
@@ -13,6 +20,24 @@ import * as ShoppingListActions from '../../shopping-list/store/shopping-list.ac
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.css'],
+  animations: [
+    trigger('itemFadeIn', [
+      state(
+        'in',
+        style({
+          opacity: 1,
+          transform: 'translateX(0)',
+        })
+      ),
+      transition('void => *', [
+        style({
+          opacity: 0,
+          transform: 'translateX(100px)',
+        }),
+        animate(400),
+      ]),
+    ]),
+  ],
 })
 export class RecipeDetailComponent implements OnInit {
   recipe: Recipe;
