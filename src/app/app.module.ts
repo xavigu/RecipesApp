@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -18,6 +18,9 @@ import { AuthEffects } from './auth/store/auth.effects';
 import { RecipeEffects } from './recipes/store/recipes.effects';
 import { environment } from 'src/environments/environment';
 
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
   imports: [
@@ -30,7 +33,19 @@ import { environment } from 'src/environments/environment';
     BrowserAnimationsModule,
     SharedModule,
     CoreModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient],
+      },
+    }),
   ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+// AOT compilation support
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
