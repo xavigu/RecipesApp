@@ -18,7 +18,11 @@ import { AuthEffects } from './auth/store/auth.effects';
 import { RecipeEffects } from './recipes/store/recipes.effects';
 import { environment } from 'src/environments/environment';
 
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
@@ -36,16 +40,15 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: httpTranslateLoader,
+        useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
         deps: [HttpClient],
       },
     }),
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
-
-// AOT compilation support
-export function httpTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+export class AppModule {
+  constructor(translate: TranslateService) {
+    translate.setDefaultLang('en');
+  }
 }
