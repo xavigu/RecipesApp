@@ -1,0 +1,8 @@
+{
+  "LOGIN-EMAIL": "E-mail",
+  "LOGIN-PASSWORD": "Password",
+  "LOGIN-BUTTON": "Login",
+  "SIGNUP-BUTTON": "Sign Up",
+  "CHANGE-TO-LOGIN-BUTTON": "Change to Login mode",
+  "CHANGE-TO-SIGNUP-BUTTON": "Change to Sign up mode"
+}

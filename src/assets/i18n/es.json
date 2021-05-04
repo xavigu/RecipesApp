@@ -1,0 +1,8 @@
+{
+  "LOGIN-EMAIL": "Correo",
+  "LOGIN-PASSWORD": "Contraseña",
+  "LOGIN-BUTTON": "Iniciar sesión",
+  "SIGNUP-BUTTON": "Registrarse",
+  "CHANGE-TO-LOGIN-BUTTON": "Cambiar a modo Inicio sesión",
+  "CHANGE-TO-SIGNUP-BUTTON": "Cambiar a modo Registrarse"
+}
