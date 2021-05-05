@@ -12,8 +12,8 @@
   "HEADER-SHOPLIST": "Lista de Compra",
   "HEADER-LOGOUT": "Cerrar Sesión",
   "HEADER-MANAGE": "Opciones",
-  "HEADER-SAVE": "Guardar Datos",
-  "HEADER-FETCH": "Cargar Datos",
+  "HEADER-SAVE": "Guardar Recetas",
+  "HEADER-FETCH": "Cargar Recetas",
 
   "SHOPPING-NAME": "Nombre",
   "SHOPPING-AMOUNT": "Cantidad",

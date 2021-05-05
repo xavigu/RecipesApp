@@ -12,8 +12,8 @@
   "HEADER-SHOPLIST": "Shopping List",
   "HEADER-LOGOUT": "Logout",
   "HEADER-MANAGE": "Manage",
-  "HEADER-SAVE": "Save Data",
-  "HEADER-FETCH": "Fetch Data",
+  "HEADER-SAVE": "Save Recipes",
+  "HEADER-FETCH": "Fetch Recipes",
 
   "SHOPPING-NAME": "Name",
   "SHOPPING-AMOUNT": "Amount",
