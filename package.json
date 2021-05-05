@@ -28,6 +28,8 @@
     "@angular/router": "~8.2.14",
     "@ngrx/effects": "^8.6.0",
     "@ngrx/store": "^8.6.0",
+    "@ngx-translate/core": "^12.1.2",
+    "@ngx-translate/http-loader": "^6.0.0",
     "bootstrap": "^3.4.1",
     "rxjs": "~6.4.0",
     "sweetalert2": "^9.7.2",

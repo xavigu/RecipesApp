@@ -17,6 +17,7 @@ import { AlertService } from '../shared/alert/alert.service';
 import * as fromApp from '../store/app.reducer';
 import * as AuthActions from '../auth/store/auth.actions';
 import * as RecipeActions from '../recipes/store/recipes.actions';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -36,8 +37,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private alertService: AlertService,
-    private store: Store<fromApp.AppState>
-  ) {}
+    private store: Store<fromApp.AppState>,
+    public translate: TranslateService
+  ) {
+    translate.addLangs(['en', 'es']);
+  }
 
   ngOnInit() {
     this.userSub = this.store
@@ -75,6 +79,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onLogout() {
     this.store.dispatch(new AuthActions.Logout());
+  }
+
+  switchLang(lang: string) {
+    this.translate.use(lang);
   }
 
   ngOnDestroy() {

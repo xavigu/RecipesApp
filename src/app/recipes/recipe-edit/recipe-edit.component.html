@@ -1,99 +1,124 @@
 <div class="row">
-    <div class="col-xs-12">
-        <form [formGroup] = "recipeForm" (ngSubmit)="onSubmit()">
-            <div class="row">
-                <div class="col-xs-12">
-                    <button 
-                        type="submit"
-                        class="btn btn-success main"
-                        [disabled]="!recipeForm.valid">Save</button>
-                    <button 
-                        (click)="goBack()"
-                        type="button" 
-                        class="btn btn-danger main">Cancel</button>
-                </div>
+  <div class="col-xs-12">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button
+            type="submit"
+            class="btn btn-success main"
+            [disabled]="!recipeForm.valid"
+          >
+            {{ 'RECIPES-EDIT-SAVE-BUTTON' | translate }}
+          </button>
+          <button (click)="goBack()" type="button" class="btn btn-danger main">
+            {{ 'RECIPES-EDIT-CANCEL-BUTTON' | translate }}
+          </button>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">{{ 'RECIPES-EDIT-NAME' | translate }}</label>
+            <!--  otra forma de llamarlo sería esta [formControlName]="'name'" -->
+            <input
+              formControlName="name"
+              class="form-control"
+              type="text"
+              id="name"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="imagePath">{{
+              'RECIPES-EDIT-IMAGE' | translate
+            }}</label>
+            <input
+              formControlName="imagePath"
+              class="form-control"
+              type="text"
+              id="imagePath"
+              #imagePath
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <img [src]="imagePath.value" class="img-responsive" />
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">{{
+              'RECIPES-EDIT-DESCRIPTION' | translate
+            }}</label>
+            <textarea
+              formControlName="description"
+              class="form-control"
+              type="text"
+              id="description"
+              rows="6"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12" formArrayName="ingredients">
+          <!-- controls del ngFor es el metodo get controls que devuelve el array de formGroups de ingredients -->
+          <div
+            class="row"
+            *ngFor="let ingredientCtrl of controls; let i = index"
+            [formGroupName]="i"
+            style="margin-top: 10px;"
+          >
+            <div class="col-xs-8">
+              <input type="text" class="form-control" formControlName="name" />
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <!--  otra forma de llamarlo sería esta [formControlName]="'name'" -->
-                         <input 
-                            formControlName="name"
-                            class="form-control" 
-                            type="text"
-                            id="name">
-                    </div>
-                </div>
+            <div class="col-xs-2">
+              <input
+                type="number"
+                class="form-control"
+                formControlName="amount"
+              />
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="imagePath">Image URL</label>
-                        <input
-                            formControlName="imagePath"
-                            class="form-control" 
-                            type="text"
-                            id="imagePath"
-                            #imagePath>
-                    </div>
-                </div>
+            <div class="col-xs-2">
+              <button
+                (click)="onDeleteIngredient(i)"
+                type="button"
+                class="btn btn-danger"
+              >
+                X
+              </button>
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <img [src]="imagePath.value" class="img-responsive">
-                </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-xs-12">
+              <button
+                type="button"
+                class="btn btn-success main"
+                (click)="onAddIngredient()"
+              >
+                {{ 'RECIPES-EDIT-ADD-INGREDIENTS' | translate }}
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger main"
+                (click)="onDeleteIngredients()"
+              >
+                {{ 'RECIPES-EDIT-DELETE-INGREDIENTS' | translate }}
+              </button>
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea
-                            formControlName="description"
-                            class="form-control" 
-                            type="text"
-                            id="description"
-                            rows="6"></textarea>
-                    </div>
-                </div>
-            </div>
-             <div class="row">
-                <div class="col-xs-12" formArrayName = "ingredients">  
-                    <!-- controls del ngFor es el metodo get controls que devuelve el array de formGroups de ingredients -->
-                    <div 
-                      class="row" 
-                      *ngFor="let ingredientCtrl of controls; let i = index"
-                      [formGroupName] = "i"
-                      style="margin-top:10px">
-                        <div class="col-xs-8">
-                            <input type="text" class="form-control" formControlName="name">
-                        </div>
-                        <div class="col-xs-2">
-                            <input type="number" class="form-control" formControlName="amount">
-                        </div>
-                        <div class="col-xs-2">
-                            <button 
-                                (click)="onDeleteIngredient(i)"
-                                type="button"
-                                class="btn btn-danger">X</button>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <button 
-                                type="button"
-                                class="btn btn-success main" 
-                                (click)="onAddIngredient()">Add Ingredient</button>
-                            <button 
-                                type="button"
-                                class="btn btn-danger main" 
-                                (click)="onDeleteIngredients()">Delete All Ingredients</button>
-                        </div>
-                    </div>
-                    <br>                                     
-                </div>
-            </div>
-        </form>
-    </div>
+          </div>
+          <br />
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

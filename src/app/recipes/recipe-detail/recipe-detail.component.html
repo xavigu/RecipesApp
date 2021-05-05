@@ -17,20 +17,22 @@
   <div class="col-xs-12">
     <div class="btn-group" appDropdown>
       <button type="button" class="btn btn-primary dropdown-toggle">
-        Manage Recipe <span class="caret"></span>
+        {{ 'RECIPES-DETAIL-MANAGE' | translate }} <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
         <li>
-          <a (click)="onAddToShoopingList()" style="cursor: pointer;"
-            >Add To Shopping List</a
-          >
+          <a (click)="onAddToShoopingList()" style="cursor: pointer;">{{
+            'RECIPES-DETAIL-ADD-SHOPPING' | translate
+          }}</a>
         </li>
         <li>
-          <a (click)="onEditRecipe()" style="cursor: pointer;">Edit Recipe</a>
+          <a (click)="onEditRecipe()" style="cursor: pointer;">{{
+            'RECIPES-DETAIL-EDIT' | translate
+          }}</a>
         </li>
         <li>
           <a (click)="onDeleteRecipe()" style="cursor: pointer;">
-            Delete Recipe</a
+            {{ 'RECIPES-DETAIL-DELETE' | translate }}</a
           >
         </li>
       </ul>
@@ -47,7 +49,7 @@
 <br />
 <div class="row">
   <div class="col-xs-12">
-    <h4>Ingredientes:</h4>
+    <h4>{{ 'RECIPES-DETAIL-INGREDIENTS' | translate }}</h4>
     <ul class="list-group">
       <li
         class="list-group-item"

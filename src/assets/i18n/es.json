@@ -1,0 +1,41 @@
+{
+  "LOGIN-EMAIL": "Correo",
+  "LOGIN-PASSWORD": "Contraseña",
+  "LOGIN-BUTTON": "Iniciar sesión",
+  "SIGNUP-BUTTON": "Registrarse",
+  "CHANGE-TO-LOGIN-BUTTON": "Cambiar a modo Inicio sesión",
+  "CHANGE-TO-SIGNUP-BUTTON": "Cambiar a modo Registrarse",
+
+  "HEADER-TITLE": "Libro Recetas",
+  "HEADER-AUTHENTICATION": "Autenticación",
+  "HEADER-RECIPES": "Recetas",
+  "HEADER-SHOPLIST": "Lista de Compra",
+  "HEADER-LOGOUT": "Cerrar Sesión",
+  "HEADER-MANAGE": "Opciones",
+  "HEADER-SAVE": "Guardar Recetas",
+  "HEADER-FETCH": "Cargar Recetas",
+
+  "SHOPPING-NAME": "Nombre",
+  "SHOPPING-AMOUNT": "Cantidad",
+  "SHOPPING-ADD": "Añadir",
+  "SHOPPING-UPDATE": "Actualizar",
+  "SHOPPING-DELETE": "Eliminar",
+  "SHOPPING-CLEAR": "Limpiar",
+
+  "RECIPES-START-TITLE": "Por favor, selecciona una receta!",
+  "RECIPES-NEW-RECIPE-BUTTON": "Nueva Receta",
+
+  "RECIPES-DETAIL-MANAGE": "Opciones Receta",
+  "RECIPES-DETAIL-ADD-SHOPPING": "Añadir a Lista",
+  "RECIPES-DETAIL-EDIT": "Editar Receta",
+  "RECIPES-DETAIL-DELETE": "Eliminar Receta",
+  "RECIPES-DETAIL-INGREDIENTS": "Ingredientes:",
+
+  "RECIPES-EDIT-SAVE-BUTTON": "Guardar",
+  "RECIPES-EDIT-CANCEL-BUTTON": "Cancelar",
+  "RECIPES-EDIT-NAME": "Nombre",
+  "RECIPES-EDIT-IMAGE": "URL de la imagen",
+  "RECIPES-EDIT-DESCRIPTION": "Descripción",
+  "RECIPES-EDIT-ADD-INGREDIENTS": "Añadir ingrediente",
+  "RECIPES-EDIT-DELETE-INGREDIENTS": "Eliminar ingredientes"
+}

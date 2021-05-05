@@ -1,0 +1,41 @@
+{
+  "LOGIN-EMAIL": "E-mail",
+  "LOGIN-PASSWORD": "Password",
+  "LOGIN-BUTTON": "Login",
+  "SIGNUP-BUTTON": "Sign Up",
+  "CHANGE-TO-LOGIN-BUTTON": "Change to Login mode",
+  "CHANGE-TO-SIGNUP-BUTTON": "Change to Sign up mode",
+
+  "HEADER-TITLE": "Recipe Book",
+  "HEADER-AUTHENTICATION": "Authentication",
+  "HEADER-RECIPES": "Recipes",
+  "HEADER-SHOPLIST": "Shopping List",
+  "HEADER-LOGOUT": "Logout",
+  "HEADER-MANAGE": "Manage",
+  "HEADER-SAVE": "Save Recipes",
+  "HEADER-FETCH": "Fetch Recipes",
+
+  "SHOPPING-NAME": "Name",
+  "SHOPPING-AMOUNT": "Amount",
+  "SHOPPING-ADD": "Add",
+  "SHOPPING-UPDATE": "Update",
+  "SHOPPING-DELETE": "Delete",
+  "SHOPPING-CLEAR": "Clear",
+
+  "RECIPES-START-TITLE": "Please, select a recipe!",
+  "RECIPES-NEW-RECIPE-BUTTON": "New Recipe",
+
+  "RECIPES-DETAIL-MANAGE": "Manage Recipe",
+  "RECIPES-DETAIL-ADD-SHOPPING": "Add To Shopping List",
+  "RECIPES-DETAIL-EDIT": "Edit Recipe",
+  "RECIPES-DETAIL-DELETE": "Delete Recipe",
+  "RECIPES-DETAIL-INGREDIENTS": "Ingredients:",
+
+  "RECIPES-EDIT-SAVE-BUTTON": "Save",
+  "RECIPES-EDIT-CANCEL-BUTTON": "Cancel",
+  "RECIPES-EDIT-NAME": "Name",
+  "RECIPES-EDIT-IMAGE": "Image URL",
+  "RECIPES-EDIT-DESCRIPTION": "Description",
+  "RECIPES-EDIT-ADD-INGREDIENTS": "Add ingredient",
+  "RECIPES-EDIT-DELETE-INGREDIENTS": "Delete all ingredients"
+}
