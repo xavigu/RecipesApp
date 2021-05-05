@@ -4,5 +4,14 @@
   "LOGIN-BUTTON": "Login",
   "SIGNUP-BUTTON": "Sign Up",
   "CHANGE-TO-LOGIN-BUTTON": "Change to Login mode",
-  "CHANGE-TO-SIGNUP-BUTTON": "Change to Sign up mode"
+  "CHANGE-TO-SIGNUP-BUTTON": "Change to Sign up mode",
+
+  "HEADER-TITLE": "Recipe Book",
+  "HEADER-AUTHENTICATION": "Authentication",
+  "HEADER-RECIPES": "Recipes",
+  "HEADER-SHOPLIST": "Shopping List",
+  "HEADER-LOGOUT": "Logout",
+  "HEADER-MANAGE": "Manage",
+  "HEADER-SAVE": "Save Data",
+  "HEADER-FETCH": "Fetch Data"
 }

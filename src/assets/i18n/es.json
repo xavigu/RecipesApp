@@ -4,5 +4,14 @@
   "LOGIN-BUTTON": "Iniciar sesión",
   "SIGNUP-BUTTON": "Registrarse",
   "CHANGE-TO-LOGIN-BUTTON": "Cambiar a modo Inicio sesión",
-  "CHANGE-TO-SIGNUP-BUTTON": "Cambiar a modo Registrarse"
+  "CHANGE-TO-SIGNUP-BUTTON": "Cambiar a modo Registrarse",
+
+  "HEADER-TITLE": "Libro Recetas",
+  "HEADER-AUTHENTICATION": "Autenticación",
+  "HEADER-RECIPES": "Recetas",
+  "HEADER-SHOPLIST": "Lista de Compra",
+  "HEADER-LOGOUT": "Cerrar Sesión",
+  "HEADER-MANAGE": "Opciones",
+  "HEADER-SAVE": "Guardar Datos",
+  "HEADER-FETCH": "Cargar Datos"
 }
