@@ -13,5 +13,12 @@
   "HEADER-LOGOUT": "Cerrar Sesión",
   "HEADER-MANAGE": "Opciones",
   "HEADER-SAVE": "Guardar Datos",
-  "HEADER-FETCH": "Cargar Datos"
+  "HEADER-FETCH": "Cargar Datos",
+
+  "SHOPPING-NAME": "Nombre",
+  "SHOPPING-AMOUNT": "Cantidad",
+  "SHOPPING-ADD": "Añadir",
+  "SHOPPING-UPDATE": "Actualizar",
+  "SHOPPING-DELETE": "Eliminar",
+  "SHOPPING-CLEAR": "Limpiar"
 }

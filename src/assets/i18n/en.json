@@ -13,5 +13,12 @@
   "HEADER-LOGOUT": "Logout",
   "HEADER-MANAGE": "Manage",
   "HEADER-SAVE": "Save Data",
-  "HEADER-FETCH": "Fetch Data"
+  "HEADER-FETCH": "Fetch Data",
+
+  "SHOPPING-NAME": "Name",
+  "SHOPPING-AMOUNT": "Amount",
+  "SHOPPING-ADD": "Add",
+  "SHOPPING-UPDATE": "Update",
+  "SHOPPING-DELETE": "Delete",
+  "SHOPPING-CLEAR": "Clear"
 }

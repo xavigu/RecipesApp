@@ -1,36 +1,54 @@
 <div class="row">
-    <div class="col-xs-12">
-        <form (ngSubmit)="onSubmit(f)" #f="ngForm">  <!-- Acordar asignarle ngForm a la etiqueta del form para tener acceso al JS Object del form-->
-            <div class="row">
-                <div class="col-sm-5 form-group">
-                    <label for="name">Name</label>
-                    <input 
-                        type="text" 
-                        id="name" 
-                        name="name" 
-                        class="form-control" 
-                        ngModel
-                        required >
-                </div>
-                <div class="col-sm-2 form-group">
-                    <label for="amount">Amount</label>
-                    <input 
-                        type="number" 
-                        id="amount" 
-                        name="amount" 
-                        class="form-control" 
-                        ngModel
-                        required
-                        pattern="^[1-9]+[0-9]*$">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <button class="btn btn-success" type="submit" [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add'}}</button>
-                    <button *ngIf="editMode" class="btn btn-danger" type="button" (click)="onDelete()">Delete</button>
-                    <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
-                </div>
-            </div>
-        </form>
-    </div>
+  <div class="col-xs-12">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <!-- Acordar asignarle ngForm a la etiqueta del form para tener acceso al JS Object del form-->
+      <div class="row">
+        <div class="col-sm-5 form-group">
+          <label for="name">{{ 'SHOPPING-NAME' | translate }}</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="form-control"
+            ngModel
+            required
+          />
+        </div>
+        <div class="col-sm-2 form-group">
+          <label for="amount">{{ 'SHOPPING-AMOUNT' | translate }}</label>
+          <input
+            type="number"
+            id="amount"
+            name="amount"
+            class="form-control"
+            ngModel
+            required
+            pattern="^[1-9]+[0-9]*$"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" type="submit" [disabled]="!f.valid">
+            {{
+              editMode
+                ? ('SHOPPING-UPDATE' | translate)
+                : ('SHOPPING-ADD' | translate)
+            }}
+          </button>
+          <button
+            *ngIf="editMode"
+            class="btn btn-danger"
+            type="button"
+            (click)="onDelete()"
+          >
+            {{ 'SHOPPING-DELETE' | translate }}
+          </button>
+          <button class="btn btn-primary" type="button" (click)="onClear()">
+            {{ 'SHOPPING-CLEAR' | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
