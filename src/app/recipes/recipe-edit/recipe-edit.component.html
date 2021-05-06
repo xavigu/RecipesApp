@@ -3,11 +3,7 @@
     <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-xs-12">
-          <button
-            type="submit"
-            class="btn btn-success main"
-            [disabled]="!recipeForm.valid"
-          >
+          <button type="submit" class="btn btn-success main" [disabled]="!recipeForm.valid">
             {{ 'RECIPES-EDIT-SAVE-BUTTON' | translate }}
           </button>
           <button (click)="goBack()" type="button" class="btn btn-danger main">
@@ -21,28 +17,15 @@
           <div class="form-group">
             <label for="name">{{ 'RECIPES-EDIT-NAME' | translate }}</label>
             <!--  otra forma de llamarlo sería esta [formControlName]="'name'" -->
-            <input
-              formControlName="name"
-              class="form-control"
-              type="text"
-              id="name"
-            />
+            <input formControlName="name" class="form-control" type="text" id="name" />
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
-            <label for="imagePath">{{
-              'RECIPES-EDIT-IMAGE' | translate
-            }}</label>
-            <input
-              formControlName="imagePath"
-              class="form-control"
-              type="text"
-              id="imagePath"
-              #imagePath
-            />
+            <label for="imagePath">{{ 'RECIPES-EDIT-IMAGE' | translate }}</label>
+            <input formControlName="imagePath" class="form-control" type="text" id="imagePath" #imagePath />
           </div>
         </div>
       </div>
@@ -55,9 +38,7 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
-            <label for="description">{{
-              'RECIPES-EDIT-DESCRIPTION' | translate
-            }}</label>
+            <label for="description">{{ 'RECIPES-EDIT-DESCRIPTION' | translate }}</label>
             <textarea
               formControlName="description"
               class="form-control"
@@ -81,18 +62,10 @@
               <input type="text" class="form-control" formControlName="name" />
             </div>
             <div class="col-xs-2">
-              <input
-                type="number"
-                class="form-control"
-                formControlName="amount"
-              />
+              <input type="number" class="form-control" formControlName="amount" />
             </div>
             <div class="col-xs-2">
-              <button
-                (click)="onDeleteIngredient(i)"
-                type="button"
-                class="btn btn-danger"
-              >
+              <button (click)="onDeleteIngredient(i)" type="button" class="btn btn-danger">
                 X
               </button>
             </div>
@@ -100,18 +73,10 @@
           <br />
           <div class="row">
             <div class="col-xs-12">
-              <button
-                type="button"
-                class="btn btn-success main"
-                (click)="onAddIngredient()"
-              >
+              <button type="button" class="btn btn-success main" (click)="onAddIngredient()">
                 {{ 'RECIPES-EDIT-ADD-INGREDIENTS' | translate }}
               </button>
-              <button
-                type="button"
-                class="btn btn-danger main"
-                (click)="onDeleteIngredients()"
-              >
+              <button type="button" class="btn btn-danger main" (click)="onDeleteIngredients()">
                 {{ 'RECIPES-EDIT-DELETE-INGREDIENTS' | translate }}
               </button>
             </div>
