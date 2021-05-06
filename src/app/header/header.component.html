@@ -4,15 +4,9 @@
       <button type="button" class="navbar-toggle" (click)="onCollapsed()">
         <span class="icon-bar" *ngFor="let iconBar of [1, 2, 3]"></span>
       </button>
-      <a routerLink="/" class="navbar-brand">{{
-        'HEADER-TITLE' | translate
-      }}</a>
+      <a routerLink="/" class="navbar-brand">{{ 'HEADER-TITLE' | translate }}</a>
     </div>
-    <div
-      class="navbar-collapse"
-      [ngClass]="{ collapse: collapsed }"
-      (window:resize)="collapsed = true"
-    >
+    <div class="navbar-collapse" [ngClass]="{ collapse: collapsed }" (window:resize)="collapsed = true">
       <ul class="nav navbar-nav">
         <li routerLinkActive="active" *ngIf="!isAuthenticated">
           <a routerLink="/auth">{{ 'HEADER-AUTHENTICATION' | translate }}</a>
@@ -26,33 +20,23 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li *ngIf="isAuthenticated">
-          <a style="cursor: pointer;" (click)="onLogout()">{{
-            'HEADER-LOGOUT' | translate
-          }}</a>
+          <a style="cursor: pointer;" (click)="onLogout()">{{ 'HEADER-LOGOUT' | translate }}</a>
         </li>
         <li class="dropdown" appDropdown *ngIf="isAuthenticated">
-          <a style="cursor: pointer;" class="dropdown-toggle" role="button"
-            >{{ 'HEADER-MANAGE' | translate }} <span class="caret"></span
-          ></a>
+          <a style="cursor: pointer;" class="dropdown-toggle" role="button">
+            {{ 'HEADER-MANAGE' | translate }} <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
             <li *ngIf="isAdmin">
-              <a style="cursor: pointer;" (click)="onSaveData()">{{
-                'HEADER-SAVE' | translate
-              }}</a>
+              <a style="cursor: pointer;" (click)="onSaveData()">{{ 'HEADER-SAVE' | translate }}</a>
             </li>
             <li>
-              <a style="cursor: pointer;" (click)="onFetchData()">{{
-                'HEADER-FETCH' | translate
-              }}</a>
+              <a style="cursor: pointer;" (click)="onFetchData()">{{ 'HEADER-FETCH' | translate }}</a>
             </li>
           </ul>
         </li>
         <li class="multilanguage-select">
-          <select
-            class="form-control"
-            #selectedLang
-            (change)="switchLang(selectedLang.value)"
-          >
+          <select class="form-control" #selectedLang (change)="switchLang(selectedLang.value)">
             <option
               *ngFor="let language of translate.getLangs()"
               [value]="language"
