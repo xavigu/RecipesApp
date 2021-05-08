@@ -19,12 +19,7 @@ export interface AuthResponseData {
   registered?: boolean;
 }
 
-const handleAuthentication = (
-  expiresIn: number,
-  email: string,
-  localId: string,
-  token: string
-) => {
+const handleAuthentication = (expiresIn: number, email: string, localId: string, token: string) => {
   const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
   const user = new User(email, localId, token, expirationDate);
   localStorage.setItem('userData', JSON.stringify(user));
@@ -50,16 +45,13 @@ const handleError = (errorRes: any) => {
       errorMessage = 'Password sign-in is disabled for this project.';
       break;
     case 'TOO_MANY_ATTEMPTS_TRY_LATER':
-      errorMessage =
-        'We have blocked all requests from this device due to unusual activity. Try again later.';
+      errorMessage = 'We have blocked all requests from this device due to unusual activity. Try again later.';
       break;
     case 'EMAIL_NOT_FOUND':
-      errorMessage =
-        'There is no user record corresponding to this identifier. The user may have been deleted.';
+      errorMessage = 'There is no user record corresponding to this identifier. The user may have been deleted.';
       break;
     case 'INVALID_PASSWORD':
-      errorMessage =
-        'The password is invalid or the user does not have a password.';
+      errorMessage = 'The password is invalid or the user does not have a password.';
       break;
     case 'USER_DISABLED':
       errorMessage = 'The user account has been disabled by an administrator.';
@@ -78,8 +70,7 @@ export class AuthEffects {
     switchMap((signupData: AuthActions.SignupStart) => {
       return this.http
         .post<AuthResponseData>(
-          'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' +
-            environment.firebaseAPIKey,
+          'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKey,
           {
             email: signupData.payload.email,
             password: signupData.payload.password,
@@ -91,12 +82,7 @@ export class AuthEffects {
             this.authService.setLogoutTimer(+resData.expiresIn * 1000);
           }),
           map((resData) => {
-            return handleAuthentication(
-              +resData.expiresIn,
-              resData.email,
-              resData.localId,
-              resData.idToken
-            );
+            return handleAuthentication(+resData.expiresIn, resData.email, resData.localId, resData.idToken);
           }),
           catchError((errorRes) => {
             return handleError(errorRes);
@@ -111,8 +97,7 @@ export class AuthEffects {
     switchMap((authData: AuthActions.LoginStart) => {
       return this.http
         .post<AuthResponseData>(
-          'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
-            environment.firebaseAPIKey,
+          'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.firebaseAPIKey,
           {
             email: authData.payload.email,
             password: authData.payload.password,
@@ -124,12 +109,7 @@ export class AuthEffects {
             this.authService.setLogoutTimer(+resData.expiresIn * 1000);
           }),
           map((resData) => {
-            return handleAuthentication(
-              +resData.expiresIn,
-              resData.email,
-              resData.localId,
-              resData.idToken
-            );
+            return handleAuthentication(+resData.expiresIn, resData.email, resData.localId, resData.idToken);
           }),
           catchError((errorRes) => {
             return handleError(errorRes);
@@ -149,7 +129,7 @@ export class AuthEffects {
         _tokenExpirationDate: string;
       } = JSON.parse(localStorage.getItem('userData'));
       if (!userData) {
-        return { type: 'DUMMY' };
+        return { type: 'No userData effect' };
       }
       const loadedUser = new User(
         userData.email,
@@ -158,9 +138,7 @@ export class AuthEffects {
         new Date(userData._tokenExpirationDate)
       );
       if (loadedUser.token) {
-        const expirationDuration =
-          new Date(userData._tokenExpirationDate).getTime() -
-          new Date().getTime(); // getTime from seconds to miliseconds
+        const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime(); // getTime from seconds to miliseconds
         this.authService.setLogoutTimer(expirationDuration);
 
         return new AuthActions.AuthenticationSuccess({
@@ -171,7 +149,7 @@ export class AuthEffects {
           redirect: false,
         });
       }
-      return { type: 'DUMMY' };
+      return { type: 'LoadedUser expiration effect' };
     })
   );
 

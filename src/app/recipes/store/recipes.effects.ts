@@ -16,16 +16,9 @@ export class RecipeEffects {
   fetchRecipes = this.actions$.pipe(
     ofType(RecipeActions.FETCH_RECIPES),
     switchMap(() => {
-      return this.http.get<Recipe[]>(
-        'https://ng-course-recipeapp.firebaseio.com/recipes.json'
-      );
+      return this.http.get<Recipe[]>('https://ng-course-recipeapp.firebaseio.com/recipes.json');
     }),
     map((recipes) => {
-      // TODO Meter logica de que muestre un error si no hay database de recipes
-      // this.alertService.showErrorAlert(
-      //   'There is not recipes in the database',
-      //   this.alertHost
-      // )
       return recipes.map((recipe) => {
         return {
           ...recipe,
@@ -34,7 +27,15 @@ export class RecipeEffects {
       });
     }),
     map((recipes) => {
-      return new RecipeActions.SetRecipes(recipes);
+      if (recipes) {
+        return new RecipeActions.SetRecipes(recipes);
+      }
+      Swal.fire({
+        icon: 'warning',
+        title: 'Sorry!',
+        text: 'There is not recipes in the database',
+      });
+      return { type: 'No recipes error effect' };
     })
   );
 
@@ -53,17 +54,10 @@ export class RecipeEffects {
         });
         return;
       } else {
-        return this.http.put(
-          'https://ng-course-recipeapp.firebaseio.com/recipes.json',
-          recipes
-        );
+        return this.http.put('https://ng-course-recipeapp.firebaseio.com/recipes.json', recipes);
       }
     })
   );
 
-  constructor(
-    private actions$: Actions,
-    private http: HttpClient,
-    private store: Store<fromApp.AppState>
-  ) {}
+  constructor(private actions$: Actions, private http: HttpClient, private store: Store<fromApp.AppState>) {}
 }
