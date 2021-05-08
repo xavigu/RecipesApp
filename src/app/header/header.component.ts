@@ -1,18 +1,10 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ComponentFactoryResolver,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 import { Role } from '../auth/auth.service';
 import { User } from '../auth/user.model';
-import { PlaceholderDirective } from '../shared/placeholder.directive';
-import { AlertService } from '../shared/alert/alert.service';
 
 import * as fromApp from '../store/app.reducer';
 import * as AuthActions from '../auth/store/auth.actions';
@@ -31,15 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   collapsed = false;
   authUser: User;
 
-  // Este elemento hace referencia a la directiva añadida en el DOM
-  @ViewChild(PlaceholderDirective, { static: false })
-  alertHost: PlaceholderDirective;
-
-  constructor(
-    private alertService: AlertService,
-    private store: Store<fromApp.AppState>,
-    public translate: TranslateService
-  ) {
+  constructor(private store: Store<fromApp.AppState>, public translate: TranslateService) {
     translate.addLangs(['en', 'es']);
   }
 
@@ -66,15 +50,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onFetchData() {
     this.store.dispatch(new RecipeActions.FetchRecipes());
-    // this.dataStorageService.fetchRecipes().subscribe(
-    //   (res) => console.log('Fetch response: ', res),
-    //   () => {
-    //     this.alertService.showErrorAlert(
-    //       'There is not recipes in the database',
-    //       this.alertHost
-    //     )
-    //   }
-    // )
   }
 
   onLogout() {
