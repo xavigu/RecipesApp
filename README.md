@@ -26,7 +26,15 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-## Info content project
+## Deploy in Firebase
+
+Throw the command `firebase deploy` in master branch
+
+## Configure husky and prettier in an Angular application to standardize and automatize the code format
+
+- [Link](https://www.daptontechnologies.com/angular-prettier-husky/)
+
+## Info content course project
 
 - Use Template Driven and Reactive Forms
 - Use Firebase Database and Authentication system.
@@ -43,13 +51,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - Añadimos a los anchor(href) del navbar sus respectivos routerLink
 - Añadimos el routerLinkActive al contenedor de los anchor para que añada la clase activa al elemento cuando este activado
 - Eliminar ref elements to dont reload page
-- Añadir children routes para cargar los componentes hijos de recipes
-  (habrá que crear uno nuevo que sea el de por defecto cuando accedes al componente recipes (recipe-start))
-  (otro sera el que al dar a un elemento del recipe-list component
-  comunique el id del recipe-item clickado (a través de un Input recoge el index del ngfor)
-  utilizamos el routerLink para que vaya al recipe-detail component con la id especifica
-  (creamos un metodo en el service que obtenga la recipe por id y en el recipe-detail este siempre escuchando por cambios en la URL
-  para cargar la nueva receta con el metodo del servicio)
+- Añadir children routes para cargar los componentes hijos de recipes (habrá que crear uno nuevo que sea el de por defecto cuando accedes al componente recipes (recipe-start)) (otro sera el que al dar a un elemento del recipe-list component comunique el id del recipe-item clickado (a través de un Input recoge el index del ngfor) utilizamos el routerLink para que vaya al recipe-detail component con la id especifica (creamos un metodo en el service que obtenga la recipe por id y en el recipe-detail este siempre escuchando por cambios en la URL para cargar la nueva receta con el metodo del servicio)
 
 ## Info Firebase
 
@@ -59,7 +61,3 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - Habilitaremos la authentication a través de email en la página de authentication
 - Para obtener la API_KEY de nuestro backend de Firebase iremos a Configuracón del proyecto dandole a la rueda en la consola de Firebase.
 - Si queremos desplegar nuestro app en un Firebase hosting habrás que seguir estos [pasos](https://firebase.google.com/docs/hosting?hl=es)
-
-## Configure husky and prettier in an Angular application to standardize and automatize the code format
-
-- [Link](https://www.daptontechnologies.com/angular-prettier-husky/)
