@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import Swal from 'sweetalert2';
+import { PopupMessageService } from '../shared/popup-message.service';
 
 import * as fromApp from '../store/app.reducer';
 import * as AuthActions from './store/auth.actions';
@@ -16,23 +16,12 @@ export enum Role {
 export class AuthService {
   private tokenExpirationTimer: any;
 
-  constructor(private store: Store<fromApp.AppState>) {}
+  constructor(private store: Store<fromApp.AppState>, private popupMessage: PopupMessageService) {}
 
   setLogoutTimer(expirationDuration: number) {
     console.log('expiration duration:', expirationDuration);
     this.tokenExpirationTimer = setTimeout(() => {
-      Swal.fire({
-        title: 'El tiempo de sesión ha expirado, vuelve a logearte',
-        width: 600,
-        padding: '3em',
-        background: '#fff url(../../assets/images/trees.png)',
-        backdrop: `
-          rgba(0,0,123,0.4)
-          url("../../assets/images/nyan-cat.gif")
-          center bottom
-          no-repeat
-        `,
-      });
+      this.popupMessage.showBackdropMessage('El tiempo de sesión ha expirado, vuelve a logearte');
       this.store.dispatch(new AuthActions.Logout());
     }, expirationDuration);
   }
