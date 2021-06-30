@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import Swal from 'sweetalert2';
 
 import { Recipe } from '../recipe.model';
 
@@ -31,8 +30,8 @@ export class RecipeEffects {
       if (recipes) {
         return new RecipeActions.SetRecipes(recipes);
       }
-      this.popupMessage.showBasicMessage('There is not recipes in the database');
-      return { type: 'No recipes error effect' };
+      this.popupMessage.showBasicMessage('POPUP-NO-RECIPES-FETCH');
+      return { type: 'No recipes error fetch effect' };
     })
   );
 
@@ -44,8 +43,8 @@ export class RecipeEffects {
     switchMap(([actionData, recipesState]) => {
       const recipes = recipesState.recipes;
       if (recipes.length === 0) {
-        this.popupMessage.showBasicMessage('No recipes to save, Fetch Data first or Add New Recipe', 'success');
-        return;
+        this.popupMessage.showBasicMessage('POPUP-NO-RECIPES-SAVE', 'error');
+        return [{ type: 'No recipes error store effect' }];
       } else {
         return this.http.put('https://ng-course-recipeapp.firebaseio.com/recipes.json', recipes);
       }

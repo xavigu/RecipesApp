@@ -37,5 +37,9 @@
   "RECIPES-EDIT-IMAGE": "URL de la imagen",
   "RECIPES-EDIT-DESCRIPTION": "Descripción",
   "RECIPES-EDIT-ADD-INGREDIENTS": "Añadir ingrediente",
-  "RECIPES-EDIT-DELETE-INGREDIENTS": "Eliminar ingredientes"
+  "RECIPES-EDIT-DELETE-INGREDIENTS": "Eliminar ingredientes",
+
+  "POPUP-EXPIRATION": "El tiempo de sesión ha expirado, vuelve a logearte",
+  "POPUP-NO-RECIPES-SAVE": "No hay recetas para guardar, primero obtenga datos o agregue una nueva receta",
+  "POPUP-NO-RECIPES-FETCH": "No hay recetas en la base de datos."
 }

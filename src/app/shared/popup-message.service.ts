@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PopupMessageService {
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   showBackdropMessage(message: string = '') {
+    this.translate.get(message).subscribe((data) => {
+      message = data;
+    });
     Swal.fire({
       title: message,
       width: 600,
@@ -22,10 +26,14 @@ export class PopupMessageService {
     });
   }
 
-  showBasicMessage(message: string = '', type: SweetAlertIcon = 'warning') {
+  showBasicMessage(message: string = '', type: SweetAlertIcon = 'warning', title: string = '') {
+    this.translate.get(message).subscribe((data) => {
+      message = data;
+    });
+    const optionalTitle: string = this.translate.getDefaultLang() === 'en' ? 'Sorry!' : 'Lo Siento';
     Swal.fire({
       icon: type,
-      title: 'Sorry!',
+      title: title || optionalTitle,
       text: message,
     });
   }

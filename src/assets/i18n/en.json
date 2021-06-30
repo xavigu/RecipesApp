@@ -37,5 +37,9 @@
   "RECIPES-EDIT-IMAGE": "Image URL",
   "RECIPES-EDIT-DESCRIPTION": "Description",
   "RECIPES-EDIT-ADD-INGREDIENTS": "Add ingredient",
-  "RECIPES-EDIT-DELETE-INGREDIENTS": "Delete all ingredients"
+  "RECIPES-EDIT-DELETE-INGREDIENTS": "Delete all ingredients",
+
+  "POPUP-EXPIRATION": "The session time has expired, log in again",
+  "POPUP-NO-RECIPES-SAVE": "No recipes to save, Fetch Data first or Add New Recipe",
+  "POPUP-NO-RECIPES-FETCH": "There is not recipes in the database"
 }

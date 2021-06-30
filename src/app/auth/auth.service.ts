@@ -21,7 +21,7 @@ export class AuthService {
   setLogoutTimer(expirationDuration: number) {
     console.log('expiration duration:', expirationDuration);
     this.tokenExpirationTimer = setTimeout(() => {
-      this.popupMessage.showBackdropMessage('El tiempo de sesión ha expirado, vuelve a logearte');
+      this.popupMessage.showBackdropMessage('POPUP-EXPIRATION');
       this.store.dispatch(new AuthActions.Logout());
     }, expirationDuration);
   }
