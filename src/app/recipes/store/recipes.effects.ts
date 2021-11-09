@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import Swal from 'sweetalert2';
 
 import { Recipe } from '../recipe.model';
 
 import * as RecipeActions from './recipes.actions';
 import * as fromApp from '../../store/app.reducer';
+import { PopupMessageService } from 'src/app/shared/popup-message.service';
 
 @Injectable()
 export class RecipeEffects {
@@ -30,12 +30,8 @@ export class RecipeEffects {
       if (recipes) {
         return new RecipeActions.SetRecipes(recipes);
       }
-      Swal.fire({
-        icon: 'warning',
-        title: 'Sorry!',
-        text: 'There is not recipes in the database',
-      });
-      return { type: 'No recipes error effect' };
+      this.popupMessage.showBasicMessage('POPUP-NO-RECIPES-FETCH');
+      return { type: 'No recipes error fetch effect' };
     })
   );
 
@@ -47,17 +43,18 @@ export class RecipeEffects {
     switchMap(([actionData, recipesState]) => {
       const recipes = recipesState.recipes;
       if (recipes.length === 0) {
-        Swal.fire({
-          icon: 'warning',
-          title: 'Sorry!',
-          text: 'No recipes to save, Fetch Data first or Add New Recipe',
-        });
-        return;
+        this.popupMessage.showBasicMessage('POPUP-NO-RECIPES-SAVE', 'error');
+        return [{ type: 'No recipes error store effect' }];
       } else {
         return this.http.put('https://ng-course-recipeapp.firebaseio.com/recipes.json', recipes);
       }
     })
   );
 
-  constructor(private actions$: Actions, private http: HttpClient, private store: Store<fromApp.AppState>) {}
+  constructor(
+    private actions$: Actions,
+    private http: HttpClient,
+    private store: Store<fromApp.AppState>,
+    private popupMessage: PopupMessageService
+  ) {}
 }
