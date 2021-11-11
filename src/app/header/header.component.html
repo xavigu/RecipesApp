@@ -14,7 +14,7 @@
         <li routerLinkActive="active" *ngIf="isAuthenticated">
           <a routerLink="/recipes">{{ 'HEADER-RECIPES' | translate }}</a>
         </li>
-        <li routerLinkActive="active">
+        <li routerLinkActive="active" *ngIf="isAuthenticated">
           <a routerLink="/shopping-list">{{ 'HEADER-SHOPLIST' | translate }}</a>
         </li>
       </ul>
