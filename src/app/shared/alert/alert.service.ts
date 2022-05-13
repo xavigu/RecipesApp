@@ -1,6 +1,6 @@
 import { Injectable, ComponentFactoryResolver } from '@angular/core';
 import { AlertComponent } from './alert.component';
-import { PlaceholderDirective } from '../placeholder.directive';
+import { PlaceholderDirective } from '../directives/placeholder.directive';
 import { Subscription } from 'rxjs';
 
 @Injectable({

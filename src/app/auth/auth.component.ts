@@ -1,15 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-} from '@angular/animations';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Store } from '@ngrx/store';
 
-import { PlaceholderDirective } from 'src/app/shared/placeholder.directive';
+import { PlaceholderDirective } from 'src/app/shared/directives/placeholder.directive';
 import { AlertService } from '../shared/alert/alert.service';
 import * as fromApp from '../store/app.reducer';
 import * as AuthActions from './store/auth.actions';
@@ -46,10 +40,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   // le pasamos el placeholder directive como type y viewChild buscara la primera ocurrencia de esta directiva en el DOM
   @ViewChild(PlaceholderDirective, { static: false })
   alertHost: PlaceholderDirective;
-  constructor(
-    private alertService: AlertService,
-    private store: Store<fromApp.AppState>
-  ) {}
+  constructor(private alertService: AlertService, private store: Store<fromApp.AppState>) {}
 
   ngOnInit() {
     this.storeSub = this.store.select('auth').subscribe((authState) => {
