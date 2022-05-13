@@ -1,9 +1,12 @@
-import { Directive, HostListener } from '@angular/core';
+import { Directive, HostBinding, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[appCreditcard]',
 })
 export class CreditCardDirective {
+  @HostBinding('style.border')
+  border: string;
+
   // We need to send the event we want to listen (keydown) and the host is the element where we use this directive
   @HostListener('input', ['$event'])
   onKeyDown(event: KeyboardEvent) {
@@ -21,5 +24,11 @@ export class CreditCardDirective {
       numbers.push(trimmed.substring(i, 4));
     }
     input.value = numbers.join(' ');
+
+    this.border = '';
+    // check if only contain numbers
+    if (/[^\d]+/.test(trimmed)) {
+      this.border = '1px solid red';
+    }
   }
 }
