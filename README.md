@@ -46,7 +46,7 @@ Throw the command `firebase deploy` in master branch
 ## Pasos a seguir para añadir las rutas
 
 - Creamos el fichero app-routing module con las rutas
-- Importamos la clase de dichero fichero al app.module
+- Importamos la clase del fichero al app.module
 - Sustituimos la referencia a los dos componentes por la directica router-outlet
 - Añadimos a los anchor(href) del navbar sus respectivos routerLink
 - Añadimos el routerLinkActive al contenedor de los anchor para que añada la clase activa al elemento cuando este activado
