@@ -7,6 +7,10 @@
   "SIGNUP-TITLE": "Registro",
   "CHANGE-TO-LOGIN-BUTTON": "¿Tienes una cuenta creada?",
   "CHANGE-TO-SIGNUP-BUTTON": "¿No estás registrado?",
+  "ERROR-EMAIL-REQUIRED": "Introduce el correo",
+  "ERROR-PASSWORD-REQUIRED": "Introduce la contraseña",
+  "ERROR-EMAIL-INVALID": "El correo es invalido",
+  "ERROR-PASSWORD-INVALID": "Contraseña de al menos 6 caracteres",
 
   "HEADER-TITLE": "Libro Recetas",
   "HEADER-AUTHENTICATION": "Autenticación",

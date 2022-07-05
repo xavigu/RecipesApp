@@ -7,6 +7,10 @@
   "SIGNUP-TITLE": "Register",
   "CHANGE-TO-LOGIN-BUTTON": "Already have an account?",
   "CHANGE-TO-SIGNUP-BUTTON": "Not registered?",
+  "ERROR-EMAIL-REQUIRED": "Email is required",
+  "ERROR-PASSWORD-REQUIRED": "Password is required",
+  "ERROR-EMAIL-INVALID": "Email is invalid",
+  "ERROR-PASSWORD-INVALID": "Password needs at least 6 characters",
 
   "HEADER-TITLE": "Recipe Book",
   "HEADER-AUTHENTICATION": "Authentication",

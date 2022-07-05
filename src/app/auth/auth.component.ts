@@ -36,6 +36,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   isLogging = true;
   isLoading = false;
   error: string = null;
+  model: any = {};
   private storeSub: Subscription;
   // le pasamos el placeholder directive como type y viewChild buscara la primera ocurrencia de esta directiva en el DOM
   @ViewChild(PlaceholderDirective, { static: false })
