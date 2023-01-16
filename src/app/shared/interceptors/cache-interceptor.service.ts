@@ -19,11 +19,14 @@ export class CachingInterceptor implements HttpInterceptor {
     }
 
     return next.handle(req).pipe(
-      tap((response) => {
-        if (response instanceof HttpResponse) {
-          console.log('CachingInterceptor response: ', response);
-          this.cache.set(req.url, response);
-        }
+      tap({
+        next: (response) => {
+          if (response instanceof HttpResponse) {
+            console.log('CachingInterceptor response: ', response);
+            this.cache.set(req.url, response);
+          }
+        },
+        error: (error) => console.log('CachingInterceptor error: ', error.message),
       })
     );
   }
