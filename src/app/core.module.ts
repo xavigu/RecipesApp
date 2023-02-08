@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
-import { CachingInterceptor } from './shared/interceptors/cache-interceptor.service';
-import { LoggingInterceptor } from './shared/interceptors/logging-interceptor.service';
+import { CachingInterceptor } from './shared/interceptors/cache/cache-interceptor.service';
+import { LoggingInterceptor } from './shared/interceptors/logging/logging-interceptor.service';
 
 @NgModule({
   providers: [
