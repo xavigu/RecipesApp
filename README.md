@@ -43,16 +43,6 @@ Throw the command `firebase deploy` in master branch
 - Use **BehaviourSubject** user to emit the value emit previously even if you are not subscribed at the moment that is emitted and use **take(1)** to subscribe and unsubscribe 1 time.
 - Use **Guard** to prevent users not authenticated go to recipes page and redirect usin **URLTree**.
 
-## Pasos a seguir para añadir las rutas
-
-- Creamos el fichero app-routing module con las rutas
-- Importamos la clase del fichero al app.module
-- Sustituimos la referencia a los dos componentes por la directica router-outlet
-- Añadimos a los anchor(href) del navbar sus respectivos routerLink
-- Añadimos el routerLinkActive al contenedor de los anchor para que añada la clase activa al elemento cuando este activado
-- Eliminar ref elements to dont reload page
-- Añadir children routes para cargar los componentes hijos de recipes (habrá que crear uno nuevo que sea el de por defecto cuando accedes al componente recipes (recipe-start)) (otro sera el que al dar a un elemento del recipe-list component comunique el id del recipe-item clickado (a través de un Input recoge el index del ngfor) utilizamos el routerLink para que vaya al recipe-detail component con la id especifica (creamos un metodo en el service que obtenga la recipe por id y en el recipe-detail este siempre escuchando por cambios en la URL para cargar la nueva receta con el metodo del servicio)
-
 ## Info Firebase
 
 - Nos creamos un proyecto en Firebase
@@ -60,4 +50,5 @@ Throw the command `firebase deploy` in master branch
 - En las reglas de la Database pondremos la instrucción de que solo se puede escribir y leer si estas auth
 - Habilitaremos la authentication a través de email en la página de authentication
 - Para obtener la API_KEY de nuestro backend de Firebase iremos a Configuracón del proyecto dandole a la rueda en la consola de Firebase.
+- Las APIs para el manejo de la autenticación estan en su página [oficial](https://firebase.google.com/docs/reference/rest/auth#section-create-email-password)
 - Si queremos desplegar nuestro app en un Firebase hosting habrás que seguir estos [pasos](https://firebase.google.com/docs/hosting?hl=es)

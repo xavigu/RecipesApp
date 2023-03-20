@@ -20,6 +20,7 @@ export interface AuthResponseData {
 }
 
 const handleAuthentication = (expiresIn: number, email: string, localId: string, token: string) => {
+  // A la fecha actual en ms le sumamos la cantidad en la que expira pasada a ms(x1000)
   const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
   const user = new User(email, localId, token, expirationDate);
   localStorage.setItem('userData', JSON.stringify(user));
@@ -138,6 +139,7 @@ export class AuthEffects {
         new Date(userData._tokenExpirationDate)
       );
       if (loadedUser.token) {
+        // calculamos de nuevo la expiration date para que haga logout cuando pase el tiempo
         const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime(); // getTime from seconds to miliseconds
         this.authService.setLogoutTimer(expirationDuration);
 
